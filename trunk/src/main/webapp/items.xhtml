@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:a4j="http://richfaces.org/a4j" template="layouts/layout.xhtml">
+   <ui:define name="content">
+
+<rich:panel id="addingItem">
+        <f:facet name="header">
+            <h:outputText value="New Item "></h:outputText>
+        </f:facet>
+        <h:panelGrid columns="3">
+
+			<h:outputText value="Item Name: "/>
+            <rich:inplaceInput  value="#{wsItemController.model.itemName}"  defaultLabel="Enter Item that you want to add"  />
+            <a4j:commandLink value=""  />
+            
+            
+            <h:outputText value="Alise: " />
+            <rich:inplaceInput  value="#{wsItemController.model.itemAlieas}" defaultLabel="Item key word "  inputWidth="100"/>
+             <a4j:commandLink value="" />
+             
+            <h:outputText value="Under (Group Name:) " />
+              <rich:select enableManualInput="true" defaultLabel="Start typing for select">
+               <f:selectItems value="#{wsItemController.model.wsStockGroupDTO}" var="product" 
+           itemLabel="#{product.name}" itemValue="#{product.ID}" />
+            </rich:select>
+             <a4j:commandLink value=""  />
+            
+            <h:outputText value="Date (Available From): " />
+            <a4j:outputPanel id="calendar" layout="block">
+                    <rich:calendar value="#{wsItemController.model.onStockFrom}"
+                        locale=""
+                        popup="true"
+                       
+                        showApplyButton="true" cellWidth="24px" cellHeight="22px" style="width:200px"/>
+            </a4j:outputPanel>
+             <a4j:commandLink value=""  />
+             
+            <h:outputText value="Has impact on Stock Management :" />
+            <h:selectBooleanCheckbox value="#{wsItemController.model.hasImpactOnStock}"/>
+             <a4j:commandLink value="" />
+             
+            <h:outputText value="Is vat :" />
+            <h:selectBooleanCheckbox value="#{wsItemController.model.vat}"/>
+             <a4j:commandLink value=""  />
+             
+             <h:outputText value="Price :" />
+             <rich:inplaceInput  value="#{wsItemController.model.quantity}" inputWidth="100"/>
+             <h:commandButton value="Advanced">
+        	<rich:componentControl target="popup" operation="show" />
+    		</h:commandButton>
+              
+             
+             <h:outputText value="Quantity :" />
+       		<rich:inplaceInput  value="#{wsItemController.model.quantity}" inputWidth="100"/>
+          	 <h:commandButton value="Advanced">
+        	<rich:componentControl target="popup" operation="show" />
+    		</h:commandButton>
+            
+           
+            
+            </h:panelGrid>
+            
+      <a4j:commandButton type="submit" actionListener="#{wsItemController.addItem}" value="Save Item"  />
+
+ </rich:panel>
+ 
+ 
+  
+    <rich:popupPanel id="popup" modal="true" autosized="true" resizeable="false" >
+        <f:facet name="header">
+            <h:outputText value="Advanced options" />
+        </f:facet>
+        <f:facet name="controls">
+            <h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;">
+                X
+            </h:outputLink>
+        </f:facet>
+        <p>Any content might be inside this panel.</p>
+ 
+        <p>
+            The popup panel is open and closed from the javascript function of component client side object. The following code
+           
+           
+        </p>
+          <p>
+            The popup panel is open and closed from the javascript function of component client side object. The following code
+           
+           
+        </p>
+          <p>
+            The popup panel is open and closed from the javascript function of component client side object. The following code
+           
+           
+        </p>
+    </rich:popupPanel>
+     
+
+</ui:define>
+</ui:composition>

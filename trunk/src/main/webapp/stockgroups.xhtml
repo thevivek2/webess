@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:a4j="http://richfaces.org/a4j" template="layouts/layout.xhtml"
+   >
+   <ui:define name="content">
+<h:form>
+<rich:panel>
+        <f:facet name="header">
+            <h:outputText value="New Stock Group "></h:outputText>
+        </f:facet>
+        <h:panelGrid columns="2">
+            <h:outputText value="Stock Group: "/>
+            <rich:inplaceInput  value=""  defaultLabel="Enter Items Group that you want to add" minInputWidth="150px;" />
+            <h:outputText value="Alise:" />
+            <rich:inplaceInput  defaultLabel=""/>
+            
+            
+             
+        <h:outputText value="Under: "/>
+        <rich:select enableManualInput="true" defaultLabel="start typing for select">
+               <f:selectItems value="#{wsStockGroupController.listOfCategory}" var="product" 
+    itemLabel="#{product.name}" itemValue="#{product.ID}" />
+            </rich:select>
+            
+             <h:outputText value="Date:  "/>
+            <a4j:outputPanel id="calendar" layout="block">
+                    <rich:calendar value="#{calendarBean.selectedDate}"
+                        locale="#{calendarBean.locale}"
+                        popup="true"
+                        datePattern="#{calendarBean.pattern}"
+                        showApplyButton="#{calendarBean.showApply}" cellWidth="24px" cellHeight="22px" style="width:200px"/>
+            </a4j:outputPanel>
+            
+             <h:outputText value="Another "/>
+            <rich:inplaceInput  value=""  defaultLabel="Another Insert insert Inseert  " minInputWidth="150px;" />
+     </h:panelGrid>
+      </rich:panel>
+</h:form>
+</ui:define>
+</ui:composition>
