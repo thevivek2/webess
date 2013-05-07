@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:a4j="http://richfaces.org/a4j">
+ 
+    <h:head>
+	<h:outputStylesheet library="css" name="layout.css"/>
+	 <title> #{pageViewIdGenerator.projectHeadTitle}</title>
+    </h:head>
+   
+  <f:view contentType="text/html">
+    <h:body>
+   <h:form>
+   
+	<div id="page">
+ 
+	    <div id="header">
+		<ui:insert name="header" >
+		  <ui:include src="/layouts/header.xhtml" />
+		</ui:insert>
+	    </div>
+	   
+	    <div id="nav-cal">
+		<ui:insert name="leftsidebar" >
+		  <ui:include src="/layouts/leftsidebar.xhtml" />
+		</ui:insert>
+	    </div> 
+	    
+	     <div id="nav-cal-right">
+		<ui:insert name="rightsidebar" >
+		  <ui:include src="/layouts/rightsidebar.xhtml" />
+		</ui:insert>
+	    </div> 
+	    
+	   
+	     <div id="content">
+	    <ui:insert name="content" />
+		</div>
+		
+	
+	    <div id="footer">
+	    	<ui:insert name="footer" >
+	    	  <ui:include src="/layouts/footer.xhtml" />
+	    	 </ui:insert>
+    	    </div>
+ 
+        </div>
+         <a4j:status onstart="showLoadingMessage();" onstop="hideLoadingMessage();"
+			startText="" stopText="  ">
+		</a4j:status>
+
+		<div id="_Loading" style="width: 350px; position: fixed; top: 200px; right: 500px; height: 45px; display: none; text-align:center; padding-top:10px" >
+		  <h:graphicImage value="/images/fetch.gif" />
+		<br />
+	  <h:outputText
+			value="Please wait while application is loading..." /></div>
+ <script type="text/javascript">
+ function hideLoadingMessage(){
+	 document.getElementById('_Loading').style.display='none';
+}
+function showLoadingMessage(){
+	document.getElementById('_Loading').style.display='block';
+}
+</script>
+</h:form>
+    </h:body>
+    </f:view>
+    
+  
+</html>

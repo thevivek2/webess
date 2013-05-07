@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:a4j="http://richfaces.org/a4j"
+      >
+    <body>
+	    <ui:composition>
+
+ 
+ <table width="100%">
+		<tr>
+			<td>
+				<table width="100%" border="0" cellspacing="0" cellpadding="0"
+					id="bannerTable">
+
+					<tr>
+						<td width="114" rowspan="2">
+							<h1 class="logoPart">WS-Serve</h1></td>
+						<td class="rightPart">
+							<div style="padding-bottom: 2px;">
+								Welcome 
+								<h:outputText value="User"
+									style="font-weight:bold;font-style:italic; padding-left:3px"></h:outputText>
+								! &nbsp;&nbsp;|&nbsp;&nbsp;
+								
+								<h:commandLink id="logoutCommand2" type="submit" value="Logout"
+									action="main" immediate="true"
+									class="normalLink" />
+							</div></td>
+					</tr>
+					<tr>
+						<td valign="bottom" class="rightPart d2-link-holder">
+						 <h:outputLink value="http://test/" target=""
+								id="Vknowledge" styleClass="d2-link-d2knowledge">
+								<h:outputText value="Reports" />
+							</h:outputLink> </td>
+					</tr>
+
+
+				</table>
+				</td>
+		</tr>
+		<tr>
+			<td class="orange" colspan="2" height="2px" />
+		</tr>
+
+
+
+	</table>
+	
+		 <rich:panel>
+        
+         EServe WAM System
+    </rich:panel>
+    
+
+ 
+    
+    
+	    </ui:composition>
+    </body>
+</html>
