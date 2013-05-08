@@ -54,20 +54,20 @@
       <rich:panelMenuItem label="Other log"/>
    </rich:panelMenuGroup>
    
-   <rich:panelMenuGroup label="Units info">
-      <rich:panelMenuItem  name="account" itemMode="ajax" label="All Logs" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="main" >
-         <f:param value="account" name="pageViewId"/> 
+   <rich:panelMenuGroup label="Units">
+      <rich:panelMenuItem  name="units" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="units" >
+         <f:param value="units" name="pageViewId"/> 
          </rich:panelMenuItem>
-      <rich:panelMenuItem label="Other log "/>
-      <rich:panelMenuItem label="Other log"/>
+      <rich:panelMenuItem label="Display "/>
+      <rich:panelMenuItem label="Alter"/>
    </rich:panelMenuGroup>
    
    <rich:panelMenuGroup label="Stock Location Info">
-      <rich:panelMenuItem  name="application" itemMode="ajax" label="All Logs" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="main" >
-         <f:param value="application" name="pageViewId"/> 
+      <rich:panelMenuItem  name="location" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="location" >
+         <f:param value="location" name="pageViewId"/> 
          </rich:panelMenuItem>
-      <rich:panelMenuItem label="Other log "/>
-      <rich:panelMenuItem label="Other log"/>
+      <rich:panelMenuItem label="Display "/>
+      <rich:panelMenuItem label="Alter"/>
    </rich:panelMenuGroup>
    
    <rich:panelMenuGroup label="WAM Info">
