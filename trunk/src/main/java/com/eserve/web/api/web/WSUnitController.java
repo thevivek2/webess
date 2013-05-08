@@ -18,8 +18,6 @@ public interface WSUnitController extends WSBaseController {
 
 	public WSUnitDTO getModel();
 
-	/**
-	 * @param event
-	 */
-	void addUnit(ActionEvent event);
+	
+	public void addUnit(ActionEvent event);
 }
