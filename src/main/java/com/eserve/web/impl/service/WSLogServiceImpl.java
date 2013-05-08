@@ -41,12 +41,4 @@ public class WSLogServiceImpl extends WSCommonService implements WSLogService {
 		return dao.getModels();
 	}
 	
-	public static void main(String args[]){
-		
-	}
-	
-	
-	
-	
-	
 }
