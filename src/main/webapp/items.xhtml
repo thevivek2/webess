@@ -23,12 +23,26 @@
             <rich:inplaceInput  value="#{wsItemController.model.itemAlieas}" defaultLabel="Item key word "  inputWidth="100"/>
              <a4j:commandLink value="" />
              
+               <h:outputText value="Code: " />
+            <rich:inplaceInput  value="#{wsItemController.model.itemAlieas}" defaultLabel="Item key word "  inputWidth="100"/>
+             <a4j:commandLink value="" />
+             
             <h:outputText value="Under (Group Name:) " />
-              <rich:select enableManualInput="true" defaultLabel="Start typing for select">
+              <rich:inplaceSelect defaultLabel="start typing for select" >
                <f:selectItems value="#{wsItemController.model.wsStockGroupDTO}" var="product" 
            itemLabel="#{product.name}" itemValue="#{product.ID}" />
-            </rich:select>
+            </rich:inplaceSelect>
              <a4j:commandLink value=""  />
+             
+             
+              <h:outputText value="Stock Location " />
+              <rich:inplaceSelect defaultLabel="Start typing for select">
+               <f:selectItems value="#{wsItemController.model.wsStockGroupDTO}" var="product" 
+           itemLabel="#{product.name}" itemValue="#{product.ID}" />
+            </rich:inplaceSelect>
+             <a4j:commandLink value=""  />
+             
+             
             
             <h:outputText value="Date (Available From): " />
             <a4j:outputPanel id="calendar" layout="block">

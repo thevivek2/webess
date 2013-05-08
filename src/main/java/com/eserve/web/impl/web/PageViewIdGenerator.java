@@ -37,6 +37,10 @@ public class PageViewIdGenerator implements Serializable{
 			includedPage = "showAllLogs";
 		} else if (selectedPageViewId.equalsIgnoreCase("createItem")) {
 			includedPage = "createItem";
+		
+		} else if (selectedPageViewId.equalsIgnoreCase("units")) {
+			includedPage = "units";
+			
 		} else if (selectedPageViewId.equalsIgnoreCase("page4")) {
 			includedPage = "page4";
 		}
