@@ -75,6 +75,7 @@ public class WSUnitControllerImpl extends WSCommonController implements
 			System.out.println("Simple unit is going to be add");
 			System.out.println(model.getUnitName());
 			System.out.println(model.getUnitDesc());
+			this.model = service.getModel();
 		}
 	}
 

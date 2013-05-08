@@ -13,14 +13,14 @@
                 topGroupCollapsedRightIcon="chevronDown"
                 groupExpandedLeftIcon="disc"
                 groupCollapsedLeftIcon="disc" style="width:190px" activeItem="#{pageViewIdGenerator.includedPage}">
-   <rich:panelMenuGroup label="Account Info">
+   <rich:panelMenuGroup label="Account">
       <rich:panelMenuItem label="Groups">
          <f:param value="account" name="pageViewId"/> 
          </rich:panelMenuItem>
       <rich:panelMenuItem label="Another "/>
       <rich:panelMenuItem label="Another"/>
    </rich:panelMenuGroup>
-   <rich:panelMenuGroup label="Inventory Info">
+   <rich:panelMenuGroup label="Inventory">
    <rich:panelMenuGroup label="Stock Groups">
          <rich:panelMenuItem name="CreateStockGroup" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="stockgroups" >
          <f:param value="CreateStockGroup" name="pageViewId"/> 
@@ -29,7 +29,7 @@
          <rich:panelMenuItem label="Delete"/>
       </rich:panelMenuGroup>
       
-      <rich:panelMenuGroup label="Stock Items">
+      <rich:panelMenuGroup label="Items">
          <rich:panelMenuItem name="createItem" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="items"  >
          <f:param value="createItem" name="pageViewId"/> 
          </rich:panelMenuItem>
@@ -46,13 +46,7 @@
       <rich:panelMenuItem label="Stock Summary"/>
    </rich:panelMenuGroup>
    
-    <rich:panelMenuGroup label="Log Info">
-      <rich:panelMenuItem  name="showAllLogs" itemMode="ajax" label="All Logs" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="main" >
-         <f:param value="showAllLogs" name="pageViewId"/> 
-         </rich:panelMenuItem>
-      <rich:panelMenuItem label="Other log "/>
-      <rich:panelMenuItem label="Other log"/>
-   </rich:panelMenuGroup>
+   
    
    <rich:panelMenuGroup label="Units">
       <rich:panelMenuItem  name="units" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="units" >
@@ -62,7 +56,7 @@
       <rich:panelMenuItem label="Alter"/>
    </rich:panelMenuGroup>
    
-   <rich:panelMenuGroup label="Stock Location Info">
+   <rich:panelMenuGroup label="Stock Location">
       <rich:panelMenuItem  name="location" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="location" >
          <f:param value="location" name="pageViewId"/> 
          </rich:panelMenuItem>
@@ -70,9 +64,10 @@
       <rich:panelMenuItem label="Alter"/>
    </rich:panelMenuGroup>
    
-   <rich:panelMenuGroup label="WAM Info">
-      <rich:panelMenuItem  name="WAM" itemMode="ajax" label="All Logs" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="main" >
-         <f:param value="WAM" name="pageViewId"/> 
+   
+    <rich:panelMenuGroup label="Log">
+      <rich:panelMenuItem  name="showAllLogs" itemMode="ajax" label="All Logs" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="main" >
+         <f:param value="showAllLogs" name="pageViewId"/> 
          </rich:panelMenuItem>
       <rich:panelMenuItem label="Other log "/>
       <rich:panelMenuItem label="Other log"/>

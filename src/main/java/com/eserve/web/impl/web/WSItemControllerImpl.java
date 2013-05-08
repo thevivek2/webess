@@ -47,6 +47,7 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 		System.out.println("User Want to add item having");
 		System.out.println("Name"+model.getItemName());
 		System.out.println("Alise"+model.getItemAlieas());
+		model= new WSItemDTO();
 		
 	}
 	
