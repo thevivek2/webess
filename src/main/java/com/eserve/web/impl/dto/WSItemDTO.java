@@ -21,9 +21,6 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 
 	
 	private List<WSStockGroupDTO> wsStockGroupDTO;
-	private WSStoreLocationDTO wsStoreLocationDTO;
-	private WSUnitDTO wsUnitDTO;
-	
 	
 	private int ID;
 	private String itemName;

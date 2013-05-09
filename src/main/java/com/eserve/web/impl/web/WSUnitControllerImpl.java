@@ -5,6 +5,8 @@
  */
 package com.eserve.web.impl.web;
 
+import java.util.List;
+
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,6 +40,7 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	private boolean compound;
 
 	private WSUnitDTO model;
+	private List<WSDTO> models;
 
 	/**
 	 * @return the compound
@@ -55,7 +58,6 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	}
 
 	public String showCompound() {
-		System.out.println("show compund getting called");
 		if (getSelectedType() == 0) {
 			setSimple(true);
 			setCompound(false);
@@ -70,22 +72,16 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	public void addUnit(ActionEvent event) {
 		if (isCompound()) {
 			System.out.println("Compound unit is going to be add");
-			
+
 		} else if (isSimple()) {
-			System.out.println("Simple unit is going to be add");
-			System.out.println(model.getUnitName());
-			System.out.println(model.getUnitDesc());
-			this.model = service.getModel();
+			System.out.println("Adding Simple unit >>>>>> ");
+			service.saveModel(model);
+			model.setUnitName("");
+			model.setUnitDesc("");
+
 		}
 	}
 
-	
-	@Override
-	public boolean saveModel(WSDTO model)
-	{
-		return false;
-	}
-	
 	/**
 	 * @return the selectedType
 	 */
@@ -99,6 +95,13 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	 */
 	public void setSelectedType(int selectedType) {
 		this.selectedType = selectedType;
+		if (selectedType == 1) {
+			setCompound(true);
+			setSimple(false);
+		} else {
+			setCompound(false);
+			setSimple(true);
+		}
 	}
 
 	/*
@@ -106,24 +109,6 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	 * 
 	 * @see com.eserve.web.api.web.WSUnitController#getModel()
 	 */
-	@Override
-	public WSUnitDTO getModel() {
-		if(model==null)
-		{
-			setModel(new WSUnitDTO());
-		}
-
-		return model;
-
-	}
-
-	/**
-	 * @param model
-	 *            the model to set
-	 */
-	public void setModel(WSUnitDTO model) {
-		this.model = service.getModel();
-	}
 
 	/**
 	 * @return the simple
@@ -138,6 +123,39 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	 */
 	public void setSimple(boolean simple) {
 		this.simple = simple;
+	}
+
+	/**
+	 * @return the models
+	 */
+	public List<WSDTO> getModels() {
+		return service.getModels();
+	}
+
+	/**
+	 * @param models
+	 *            the models to set
+	 */
+	public void setModels(List<WSDTO> models) {
+		this.models = models;
+	}
+
+	@Override
+	public WSUnitDTO getModel() {
+		if (model == null) {
+			setModel(new WSUnitDTO());
+		}
+
+		return model;
+
+	}
+
+	/**
+	 * @param model
+	 *            the model to set
+	 */
+	public void setModel(WSUnitDTO model) {
+		this.model = service.getModel();
 	}
 
 }
