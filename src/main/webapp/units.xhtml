@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:a4j="http://richfaces.org/a4j" template="layouts/layout.xhtml"
+   >
+   <ui:define name="content">
+<h:form>
+<rich:panel id="unitAddPanel">
+        <f:facet name="header">
+            <h:outputText value="Define Units"></h:outputText>
+        </f:facet>
+        
+        
+        <h:panelGrid columns="2">
+        
+         <h:outputText value="Unit Define Type: "/>
+        <rich:inplaceSelect defaultLabel="start typing for select" openOnEdit="false" value="#{wsUnitController.selectedType}">
+        <a4j:ajax event="change" listener="#{wsUnitController.showCompound}"  render="MyPanelShow" /> 
+               <f:selectItems value="#{wsUnitController.model.wsUnitDTO}" var="units" 
+    		itemLabel="#{units.unitDefineTitle}" itemValue="#{units.unitDefineType}" />
+            </rich:inplaceSelect>
+            </h:panelGrid>
+            
+            
+            
+            
+            <a4j:outputPanel id="MyPanelShow" >
+            <rich:panel id="Simple" rendered="#{wsUnitController.simple}">
+              <h:panelGrid columns="2">
+           <h:outputText value="Unit : "/>
+            <rich:inplaceInput  value="#{wsUnitController.model.unitName}"  defaultLabel="Enter your Units " minInputWidth="150px;" />
+            <h:outputText value="Desc:" />
+            <rich:inplaceInput  value="#{wsUnitController.model.unitDesc}" defaultLabel="Word you remeber" minInputWidth="150px;"/>
+            </h:panelGrid>
+             </rich:panel>
+             
+             
+             
+             <rich:panel id="Compound" rendered="#{wsUnitController.compound}">
+             <h:outputText value=" Exmaple: "/>
+              <h:outputText value="kg of 1000 gms "/>
+            
+            
+             <h:panelGrid columns="4">
+             
+             <rich:inplaceSelect defaultLabel="--select--"  value=""  openOnEdit="true">
+               <f:selectItems value="#{wsUnitController.models}" var="units" 
+    		itemLabel="#{units.unitName}" itemValue="#{units.unitID}" />
+            </rich:inplaceSelect>  of
+            
+              <rich:inplaceInput  value=""  defaultLabel="---Of---" minInputWidth="75px;" />
+              
+               <rich:inplaceSelect defaultLabel="--select--" value="" openOnEdit="true">
+        
+               <f:selectItems value="#{wsUnitController.models}" var="units" 
+    		itemLabel="#{units.unitName}" itemValue="#{units.unitID}" />
+            </rich:inplaceSelect>
+            
+             
+             
+             </h:panelGrid>
+             </rich:panel>
+             
+             
+             </a4j:outputPanel>
+    
+            
+       
+            
+            
+     
+      </rich:panel>
+       <a4j:commandButton type="submit" actionListener="#{wsUnitController.addUnit}" value="Save Unit" render="unitAddPanel"  />
+</h:form>
+</ui:define>
+</ui:composition>
