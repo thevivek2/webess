@@ -71,7 +71,6 @@ public class WSCommonDAO implements WSDAO {
 	 */
 	@Override
 	public boolean saveModel(WSDTO model) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

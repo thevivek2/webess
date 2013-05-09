@@ -5,6 +5,8 @@
  */
 package com.eserve.web.api.dao;
 
+
+
 import com.eserve.web.api.core.WSDAO;
 import com.eserve.web.impl.dto.WSUnitDTO;
 
@@ -14,6 +16,15 @@ import com.eserve.web.impl.dto.WSUnitDTO;
  */
 public interface WSUnitDAO extends WSDAO {
 	
+	
+	
 	public WSUnitDTO getModel();
+
+	/**
+	 * @param model
+	 * @return
+	 */
+
+	public boolean saveModel(WSUnitDTO model);
 
 }

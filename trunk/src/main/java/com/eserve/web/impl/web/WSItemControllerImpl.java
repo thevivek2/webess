@@ -5,8 +5,7 @@
  */
 package com.eserve.web.impl.web;
 
-import javax.faces.component.behavior.AjaxBehavior;
-import javax.faces.event.AjaxBehaviorEvent;
+
 import javax.faces.event.ActionEvent;
 
 import javax.inject.Inject;
