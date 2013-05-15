@@ -6,6 +6,8 @@
 package com.eserve.web.impl.web;
 
 
+import java.io.Serializable;
+
 import javax.faces.event.ActionEvent;
 
 import javax.inject.Inject;
@@ -27,7 +29,7 @@ import com.eserve.web.impl.dto.WSItemDTO;
 @Controller
 @Named("wsItemController")
 @Scope("request")
-public class WSItemControllerImpl extends WSCommonController implements WSItemController {
+public class WSItemControllerImpl extends WSCommonController implements WSItemController ,Serializable {
 
 	private static final long serialVersionUID = -8942245932409952875L;
 	

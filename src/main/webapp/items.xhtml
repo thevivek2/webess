@@ -12,6 +12,7 @@
         <f:facet name="header">
             <h:outputText value="New Item "></h:outputText>
         </f:facet>
+        <rich:panel>
         <h:panelGrid columns="3">
 
 			<h:outputText value="Item Name: "/>
@@ -78,7 +79,7 @@
            
             
             </h:panelGrid>
-            
+            </rich:panel>
       <a4j:commandButton type="submit" actionListener="#{wsItemController.addItem}" value="Save Item"  />
 
  </rich:panel>

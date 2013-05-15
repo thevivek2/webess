@@ -98,7 +98,7 @@ public abstract interface WSBaseController {
 	 *void
 	 *@author Vivek Adhikari
 	 */
-	public void addModel(ActionEvent event, WSDTO model);
+	public void addModel(ActionEvent event);
 	
 	public boolean updateModels(List<WSDTO> modelsList);
 }

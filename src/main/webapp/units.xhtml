@@ -13,9 +13,11 @@
         <f:facet name="header">
             <h:outputText value="Define Units"></h:outputText>
         </f:facet>
-        
-        
-        <h:panelGrid columns="2">
+
+            
+            <a4j:outputPanel id="MyPanelShow" >
+            
+              <h:panelGrid columns="2">
         
          <h:outputText value="Unit Define Type: "/>
         <rich:inplaceSelect defaultLabel="start typing for select" openOnEdit="false" value="#{wsUnitController.selectedType}">
@@ -25,44 +27,81 @@
             </rich:inplaceSelect>
             </h:panelGrid>
             
-            
-            
-            
-            <a4j:outputPanel id="MyPanelShow" >
             <rich:panel id="Simple" rendered="#{wsUnitController.simple}">
-              <h:panelGrid columns="2">
+              <h:panelGrid columns="3">
            <h:outputText value="Unit : "/>
-            <rich:inplaceInput  value="#{wsUnitController.model.unitName}"  defaultLabel="Enter your Units " minInputWidth="150px;" />
+            <rich:inplaceInput id="sss" name="sss" required="true" value="#{wsUnitController.model.unitName}"  defaultLabel="Enter your Units " minInputWidth="150px;" />
+            
+             <rich:message  for="sss">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
+                    
             <h:outputText value="Desc:" />
-            <rich:inplaceInput  value="#{wsUnitController.model.unitDesc}" defaultLabel="Word you remeber" minInputWidth="150px;"/>
+            <rich:inplaceInput name="hello" id="hello" value="#{wsUnitController.model.unitDesc}" defaultLabel="Word you remeber" minInputWidth="150px;"/>
+            <rich:message  for="hello">
+             <f:facet name="errorMarker">
+              </f:facet>
+                    </rich:message>
+                    
             </h:panelGrid>
+             <a4j:commandButton id="twoandone" type="submit" actionListener="#{wsUnitController.addUnit}" value="Save Unit" render="MyPanelShow"  />
              </rich:panel>
              
              
              
-             <rich:panel id="Compound" rendered="#{wsUnitController.compound}">
-             <h:outputText value=" Exmaple: "/>
+             <rich:panel id="Compound" rendered="#{wsUnitController.compound}" >
+             <h:panelGrid columns="2">
+             <h:outputText value=" Example: "/>
               <h:outputText value="kg of 1000 gms "/>
-            
-            
-             <h:panelGrid columns="4">
+              </h:panelGrid>
+              <h:panelGrid columns="7">
              
-             <rich:inplaceSelect defaultLabel="--select--"  value=""  openOnEdit="true">
+             <rich:inplaceSelect id="primaryUnit" required="true"  defaultLabel="--select--"  value="#{wsUnitController.model.unitID}"  openOnEdit="true">
                <f:selectItems value="#{wsUnitController.models}" var="units" 
     		itemLabel="#{units.unitName}" itemValue="#{units.unitID}" />
-            </rich:inplaceSelect>  of
+            </rich:inplaceSelect>
+             <rich:message  for="primaryUnit">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
             
-              <rich:inplaceInput  value=""  defaultLabel="---Of---" minInputWidth="75px;" />
+              of
+            
+              <rich:inplaceInput id="relater" required="true" value="#{wsUnitController.model.twoUnitsRelator}"  defaultLabel="---Of---" minInputWidth="75px;" />
+             
+              <rich:message  for="relater">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
               
-               <rich:inplaceSelect defaultLabel="--select--" value="" openOnEdit="true">
+               <rich:inplaceSelect id="secondaryUnit" required="true"  defaultLabel="--select--" value="#{wsUnitController.model.secondaryUnitID}" openOnEdit="true">
         
                <f:selectItems value="#{wsUnitController.models}" var="units" 
     		itemLabel="#{units.unitName}" itemValue="#{units.unitID}" />
             </rich:inplaceSelect>
             
+             <rich:message  for="secondaryUnit">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
+            </h:panelGrid>
+            
+            
+             <h:panelGrid columns="2">
+               <h:outputText value="Desc:" />
+          
+            <h:inputTextarea id="textarea"  value="#{wsUnitController.model.unitDesc}" rows="5" cols="40" >
+             </h:inputTextarea>
              
-             
-             </h:panelGrid>
+            </h:panelGrid>
+             <a4j:commandButton id="two" type="submit" actionListener="#{wsUnitController.addUnit}" value="Save Unit" render="MyPanelShow"  >
+              <f:param value="true" name="isCompound"/> 
+              </a4j:commandButton>
              </rich:panel>
              
              
@@ -74,7 +113,7 @@
             
      
       </rich:panel>
-       <a4j:commandButton type="submit" actionListener="#{wsUnitController.addUnit}" value="Save Unit" render="unitAddPanel"  />
+      
 </h:form>
 </ui:define>
 </ui:composition>

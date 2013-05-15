@@ -11,34 +11,54 @@
 <h:form>
 <rich:panel>
         <f:facet name="header">
-            <h:outputText value="New Stock Group "></h:outputText>
+            <h:outputText value="New Group: "></h:outputText>
         </f:facet>
-        <h:panelGrid columns="2">
-            <h:outputText value="Stock Group: "/>
-            <rich:inplaceInput  value=""  defaultLabel="Enter Items Group that you want to add" minInputWidth="150px;" />
-            <h:outputText value="Alise:" />
-            <rich:inplaceInput  defaultLabel=""/>
+        <rich:panel id="addGroupPanel">
+        <h:panelGrid columns="3">
+             <h:outputText value="Name: "/>
+            <rich:inplaceInput  name="groupName" id="groupname" required="true" value="#{wsStockGroupController.model.name}"  defaultLabel="Enter Items Group that you want to add" minInputWidth="150px;" >
+            <f:validateLength minimum="3"  />
+            </rich:inplaceInput>
+             <rich:message  for="groupname">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
+                    
+                    
+             <h:outputText value="Alise:" />
+            <rich:inplaceInput  id="groupalias" value="#{wsStockGroupController.model.alias}" defaultLabel=" This is the alias "/>
+            <rich:message for="groupalias">
+             <f:facet name="errorMarker">
+                           
+              </f:facet>
+             </rich:message>
+                    
             
+             <h:outputText value="Under" />
+             <rich:inplaceSelect id="parentgroupSelect" defaultLabel="--select--" value="#{wsStockGroupController.model.parentID}" openOnEdit="true">
+               <f:selectItems value="#{wsStockGroupController.model.groups}" var="units" 
+    		itemLabel="#{units.name}" itemValue="#{units.groupID}" />
+            </rich:inplaceSelect>
             
+             <rich:message for="parentgroupSelect">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
+            
+             <h:outputText value="Des:" />
+             <h:inputTextarea id="textareaDesc"  value="#{wsStockGroupController.model.des}" rows="4" cols="35" >
+             </h:inputTextarea>
              
-        <h:outputText value="Under: "/>
-        <rich:select enableManualInput="true" defaultLabel="start typing for select">
-               <f:selectItems value="#{wsStockGroupController.listOfCategory}" var="product" 
-    itemLabel="#{product.name}" itemValue="#{product.ID}" />
-            </rich:select>
-            
-             <h:outputText value="Date:  "/>
-            <a4j:outputPanel id="calendar" layout="block">
-                    <rich:calendar value="#{calendarBean.selectedDate}"
-                        locale="#{calendarBean.locale}"
-                        popup="true"
-                        datePattern="#{calendarBean.pattern}"
-                        showApplyButton="#{calendarBean.showApply}" cellWidth="24px" cellHeight="22px" style="width:200px"/>
-            </a4j:outputPanel>
-            
-             <h:outputText value="Another "/>
-            <rich:inplaceInput  value=""  defaultLabel="Another Insert insert Inseert  " minInputWidth="150px;" />
-     </h:panelGrid>
+              <rich:message for="textareaDesc">
+                        <f:facet name="errorMarker">
+                                   </f:facet>
+                    </rich:message>
+             
+           </h:panelGrid>
+     </rich:panel>
+       <a4j:commandButton id="addGroup" type="submit" actionListener="#{wsStockGroupController.addModel}" value="Save Group" render="addGroupPanel"  />
       </rich:panel>
 </h:form>
 </ui:define>

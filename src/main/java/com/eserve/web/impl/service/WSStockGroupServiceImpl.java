@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import org.springframework.stereotype.Service;
 
+import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.api.dao.WSStockGroupDAO;
 import com.eserve.web.api.service.WSStockGroupService;
 import com.eserve.web.impl.common.WSCommonService;
@@ -26,6 +27,7 @@ import com.eserve.web.impl.dto.WSStockGroupDTO;
 public class WSStockGroupServiceImpl extends WSCommonService implements WSStockGroupService{
 
 	@Inject
+	@Named("wsStockGroupDAO")
 	private WSStockGroupDAO dao;
 
 	/* (non-Javadoc)
@@ -34,6 +36,20 @@ public class WSStockGroupServiceImpl extends WSCommonService implements WSStockG
 	@Override
 	public List<WSStockGroupDTO> getAllGroups() {
 		return dao.getListOfCategory();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.eserve.web.api.service.WSStockGroupService#getModel()
+	 */
+	@Override
+	public WSStockGroupDTO getModel() {
+		return dao.getModel();
+	}
+	
+	@Override
+	public boolean saveModel(WSDTO model)
+	{
+		return dao.saveModel(model);
 	}
 	
 	

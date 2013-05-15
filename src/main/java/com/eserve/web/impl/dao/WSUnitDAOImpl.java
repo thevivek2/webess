@@ -36,14 +36,14 @@ public class WSUnitDAOImpl  extends WSCommonDAO implements WSUnitDAO {
 		WSUnitDTO dto= new WSUnitDTO();
 		dto.setUnitDefineType(0);
 		dto.setUnitDefineTitle("Simple");
-		
-		WSUnitDTO dto1= new WSUnitDTO();
-		dto1.setUnitDefineType(1);
-		dto1.setUnitDefineTitle("Compound");
-		
 		unitDTOList.add(dto);
-		unitDTOList.add(dto1);
-		
+		if(getJdbcTemplate().queryForInt("select count(unitid) from Eserve_WAM_units")>=2)
+		{
+			WSUnitDTO dto1= new WSUnitDTO();
+			dto1.setUnitDefineType(1);
+			dto1.setUnitDefineTitle("Compound");
+			unitDTOList.add(dto1);
+		}
 		WSUnitDTO dto2= new  WSUnitDTO();
 		dto2.setWsUnitDTO(unitDTOList);
 		return dto2;
@@ -53,8 +53,19 @@ public class WSUnitDAOImpl  extends WSCommonDAO implements WSUnitDAO {
 	@Override
 	public boolean saveModel(WSUnitDTO model)
 	{
+		if(model.getUnitDefineType()==0)
+		{
+			System.out.println("Simple unit adding>>>>>>>");
 		getJdbcTemplate().update("INSERT INTO Eserve_WAM_units (Name, des) VALUES(?,?)",
 		        new Object[] { model.getUnitName(), model.getUnitDesc() });
+		}
+		else if (model.getUnitDefineType()==1)
+		{
+			System.out.println("Adding compound unit");
+			model.setUnitName(getUnitName(model.getUnitID())+"of"+model.getTwoUnitsRelator()+getUnitName(model.getSecondaryUnitID()));
+			getJdbcTemplate().update("INSERT INTO Eserve_WAM_compoundunits (primaryunit, relator,secondaryunit, name,des) VALUES(?,?,?,?,?)",
+			        new Object[] { model.getUnitID(), model.getTwoUnitsRelator(), model.getSecondaryUnitID(), model.getUnitName(), model.getUnitDesc() });
+		}
 		return true;
 	}
 	
@@ -66,15 +77,22 @@ public class WSUnitDAOImpl  extends WSCommonDAO implements WSUnitDAO {
 			public WSUnitDTO mapRow(ResultSet rs, int arg1)
 					throws SQLException {
 				WSUnitDTO dto= new WSUnitDTO();
-				dto.setUnitID(1);
+				dto.setUnitID(rs.getInt("unitid"));
 				dto.setUnitName(rs.getString("name"));
 				return dto;
 			}
 		};
-		List listofAllUnits=getJdbcTemplate().query("Select name from Eserve_WAM_units ", rowMapper);
+		List listofAllUnits=getJdbcTemplate().query("Select unitid, name from Eserve_WAM_units ", rowMapper);
 		return listofAllUnits;
 	}
 
+	public String getUnitName(int unitID)
+	{
+		
+		String sql="select name from Eserve_WAM_units where unitid="+unitID;
+		System.out.println(sql);
+		return getJdbcTemplate().queryForObject(sql, String.class);
+	}
 	
 	
 

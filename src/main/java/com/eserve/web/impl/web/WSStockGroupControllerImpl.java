@@ -4,18 +4,20 @@
 package com.eserve.web.impl.web;
 
 
-import java.util.List;
 
+
+import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+
+import com.eserve.web.api.service.WSStockGroupService;
 import com.eserve.web.api.web.WSStockGroupController;
 import com.eserve.web.impl.common.WSCommonController;
 import com.eserve.web.impl.dto.WSStockGroupDTO;
-import com.eserve.web.impl.service.WSStockGroupServiceImpl;
 
 /**
  * 
@@ -29,31 +31,65 @@ public class WSStockGroupControllerImpl extends WSCommonController implements WS
 
 	@Inject
 	@Named("wsStockGroupService")
-	private WSStockGroupServiceImpl service;
+	WSStockGroupService service;
+	
+	private WSStockGroupDTO model;
+	private boolean loadModel;
 	
 	
-	
-	public List<WSStockGroupDTO> getListOfCategory()
+	@Override
+	public void addModel(ActionEvent event)
 	{
-		System.out.println("Stock Group controller called");
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return service.getAllGroups();
+		System.out.println("adding model>>>");
+		System.out.println(model.getName());
+		service.saveModel(model);
+		setLoadModel(true);
+		getModel();
 		
 	}
 	
-	public String getName()
-	{
-	return "this is a test";
-	}
 	
 	
-	public String  getPageName()
-	{
-		return "stockgroups.xhtml";
+	
+	/**
+	 * @return the model
+	 */
+	public WSStockGroupDTO getModel() {
+		if(model == null || isLoadModel())
+		{
+			setModel(model);
+		}
+		return model;
 	}
+
+	/**
+	 * @param model the model to set
+	 */
+	public void setModel(WSStockGroupDTO model) {
+		this.model = service.getModel();
+	}
+
+
+
+
+	/**
+	 * @return the loadModel
+	 */
+	public boolean isLoadModel() {
+		return loadModel;
+	}
+
+
+
+
+	/**
+	 * @param loadModel the loadModel to set
+	 */
+	public void setLoadModel(boolean loadModel) {
+		this.loadModel = loadModel;
+	}
+
+
+	
+
 }
