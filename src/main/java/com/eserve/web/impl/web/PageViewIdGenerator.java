@@ -40,7 +40,11 @@ public class PageViewIdGenerator implements Serializable{
 		
 		} else if (selectedPageViewId.equalsIgnoreCase("units")) {
 			includedPage = "units";
-			
+		} else if (selectedPageViewId.equalsIgnoreCase("unitsdisplay")) {
+			includedPage = "unitsdisplay";
+		} else if (selectedPageViewId.equalsIgnoreCase("locationdisplay")) {
+			includedPage = "locationdisplay";
+				
 		} else if (selectedPageViewId.equalsIgnoreCase("location")) {
 			includedPage = "location";
 		}

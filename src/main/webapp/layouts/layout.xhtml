@@ -15,6 +15,7 @@
    
   <f:view contentType="text/html">
     <h:body>
+     <a4j:status onstart="#{rich:component('statPane')}.show()" onstop="#{rich:component('statPane')}.hide()" />
    <h:form>
    
 	<div id="page">
@@ -50,9 +51,13 @@
     	    </div>
  
         </div>
-         <a4j:status onstart="showLoadingMessage();" onstop="hideLoadingMessage();"
-			startText="" stopText="  ">
-		</a4j:status>
+       
+		
+		
+		 <rich:popupPanel id="statPane" modal="true" autosized="true">
+            <h:graphicImage value="/images/ai.gif" alt="ai" />
+            Please wait...
+        </rich:popupPanel>
 
 		<div id="_Loading" style="width: 350px; position: fixed; top: 200px; right: 500px; height: 45px; display: none; text-align:center; padding-top:10px" >
 		  <h:graphicImage value="/images/fetch.gif" />

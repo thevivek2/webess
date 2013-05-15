@@ -29,9 +29,17 @@ public class WSItemServiceImpl extends WSCommonService implements WSItemService 
 	@Named("wsItemDAO")
     private WSItemDAO dao;
     
+	@Override
 	public List<WSDTO> getModels()
 	{
 		return dao.getModels();
 	}
+	
+	@Override
+	public List<WSDTO> getModels(WSDTO model)
+	{
+		return dao.getModels(model);
+	}
+	
 
 }

@@ -12,6 +12,7 @@
         <f:facet name="header">
             <h:outputText value="New Item "></h:outputText>
         </f:facet>
+           <a4j:outputPanel id="MyItemAddPanel" >
         <rich:panel>
         <h:panelGrid columns="3">
 
@@ -29,7 +30,7 @@
              <a4j:commandLink value="" />
              
             <h:outputText value="Under (Group Name:) " />
-              <rich:inplaceSelect defaultLabel="start typing for select" >
+              <rich:inplaceSelect id="itemGroup" defaultLabel="--Start typing for select--" value="#{wsItemController.model.stockGroupDTO.groupID}">
                <f:selectItems value="#{wsItemController.model.wsStockGroupDTO}" var="group" 
            itemLabel="#{group.name}" itemValue="#{group.ID}" />
             </rich:inplaceSelect>
@@ -37,24 +38,33 @@
              
              
               <h:outputText value="Stock Location " />
-              <rich:inplaceSelect defaultLabel="Start typing for select">
+              <rich:inplaceSelect id="itemLocation" defaultLabel="--Select location-- " value="#{wsItemController.model.locationDTO.locationID}">
                <f:selectItems value="#{wsItemController.model.wsLocationDTOs}" var="loc" 
            itemLabel="#{loc.name}" itemValue="#{loc.locationID}" />
             </rich:inplaceSelect>
              <a4j:commandLink value=""  />
              
              
-            
-            <h:outputText value="Date (Available From): " />
-            <a4j:outputPanel id="calendar" layout="block">
-                    <rich:calendar value="#{wsItemController.model.onStockFrom}"
-                        locale=""
-                        popup="true"
-                       
-                        showApplyButton="true" cellWidth="24px" cellHeight="22px" style="width:200px"/>
-            </a4j:outputPanel>
-             <a4j:commandLink value=""  />
              
+             <h:outputText value="Select Unit Type" />
+                    <h:selectOneRadio value="#{wsItemController.simpleUnit}" >
+                         <a4j:ajax event="click" listener="#{wsItemController.showCompound}" render="MyItemAddPanel"/>
+                        <f:selectItem itemLabel="Simple" itemValue="true" />
+                        <f:selectItem itemLabel="Compound" itemValue="false" />
+                    </h:selectOneRadio>
+              <a4j:commandLink value=""  />
+              
+              
+               <h:outputText value="Unit:" />
+                    <rich:inplaceSelect id="primaryUnit" required="true"  defaultLabel="--select--"  value="#{wsItemController.model.unitDTO.unitID}" 
+                     openOnEdit="true">
+               <f:selectItems value="#{wsItemController.model.wsUnitDTOs}" var="units" 
+    		itemLabel="#{units.unitName}" itemValue="#{units.unitID}" />
+            </rich:inplaceSelect>
+              <a4j:commandLink value=""  />
+              
+              
+        
             <h:outputText value="Has impact on Stock Management :" />
             <h:selectBooleanCheckbox value="#{wsItemController.model.hasImpactOnStock}"/>
              <a4j:commandLink value="" />
@@ -65,55 +75,20 @@
              
              <h:outputText value="Price :" />
              <rich:inplaceInput  value="#{wsItemController.model.quantity}" inputWidth="100"/>
-             <h:commandButton value="Advanced">
-        	<rich:componentControl target="popup" operation="show" />
-    		</h:commandButton>
+            
               
              
              <h:outputText value="Quantity :" />
        		<rich:inplaceInput  value="#{wsItemController.model.quantity}" inputWidth="100"/>
-          	 <h:commandButton value="Advanced">
-        	<rich:componentControl target="popup" operation="show" />
-    		</h:commandButton>
+          	 
             
            
             
             </h:panelGrid>
+          
             </rich:panel>
       <a4j:commandButton type="submit" actionListener="#{wsItemController.addItem}" value="Save Item"  />
-
+   </a4j:outputPanel>
  </rich:panel>
- 
- 
-  
-    <rich:popupPanel id="popup" modal="true" autosized="true" resizeable="false" >
-        <f:facet name="header">
-            <h:outputText value="Advanced options" />
-        </f:facet>
-        <f:facet name="controls">
-            <h:outputLink value="#" onclick="#{rich:component('popup')}.hide(); return false;">
-                X
-            </h:outputLink>
-        </f:facet>
-        <p>Any content might be inside this panel.</p>
- 
-        <p>
-            The popup panel is open and closed from the javascript function of component client side object. The following code
-           
-           
-        </p>
-          <p>
-            The popup panel is open and closed from the javascript function of component client side object. The following code
-           
-           
-        </p>
-          <p>
-            The popup panel is open and closed from the javascript function of component client side object. The following code
-           
-           
-        </p>
-    </rich:popupPanel>
-     
-
 </ui:define>
 </ui:composition>

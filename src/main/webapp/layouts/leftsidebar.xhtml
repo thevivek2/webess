@@ -52,7 +52,9 @@
       <rich:panelMenuItem  name="units" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="units" >
          <f:param value="units" name="pageViewId"/> 
          </rich:panelMenuItem>
-      <rich:panelMenuItem label="Display "/>
+      <rich:panelMenuItem name="unitsdisplay" label="Display" itemMode="ajax"  actionListener="#{pageViewIdGenerator.getSideBarAction}" action="unitsdisplay">
+      <f:param value="unitsdisplay" name="pageViewId"/> 
+      </rich:panelMenuItem>
       <rich:panelMenuItem label="Alter"/>
    </rich:panelMenuGroup>
    
@@ -60,7 +62,9 @@
       <rich:panelMenuItem  name="location" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="location" >
          <f:param value="location" name="pageViewId"/> 
          </rich:panelMenuItem>
-      <rich:panelMenuItem label="Display "/>
+      <rich:panelMenuItem name="locationdisplay" label="Display" itemMode="ajax"  actionListener="#{pageViewIdGenerator.getSideBarAction}" action="locationdisplay">
+      <f:param value="locationdisplay" name="pageViewId"/> 
+      </rich:panelMenuItem>
       <rich:panelMenuItem label="Alter"/>
    </rich:panelMenuGroup>
    
