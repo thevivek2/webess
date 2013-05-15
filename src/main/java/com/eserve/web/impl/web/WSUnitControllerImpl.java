@@ -185,7 +185,6 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	 *            the test to set
 	 */
 	public void setTest(String test) {
-		System.out.println("setting test>>>>>>>>>");
 		this.test = test;
 	}
 
@@ -194,8 +193,6 @@ public class WSUnitControllerImpl extends WSCommonController implements
 		FacesContext context = FacesContext.getCurrentInstance();
 		String compound = context.getExternalContext().getRequestParameterMap()
 				.get("isCompound");
-		System.out
-				.println("post contruct called with >>>>>>>>>>>> " + compound);
 		if (compound != null && compound.equals("true")) {
 			this.compound = true;
 			this.simple = false;
