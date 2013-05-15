@@ -90,7 +90,6 @@ public class WSUnitDAOImpl  extends WSCommonDAO implements WSUnitDAO {
 	{
 		
 		String sql="select name from Eserve_WAM_units where unitid="+unitID;
-		System.out.println(sql);
 		return getJdbcTemplate().queryForObject(sql, String.class);
 	}
 	
