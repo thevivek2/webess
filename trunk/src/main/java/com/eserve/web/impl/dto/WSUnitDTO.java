@@ -21,6 +21,8 @@ public class WSUnitDTO  extends WSCommonDTO implements WSDTO {
 	private int unitID;
 	private String unitName;
 	private String unitDesc;
+	
+	private int secondaryUnitID;
     private float twoUnitsRelator;
     
     private int unitDefineType;
@@ -114,6 +116,18 @@ public class WSUnitDTO  extends WSCommonDTO implements WSDTO {
 	 */
 	public void setWsUnitDTO(List<WSUnitDTO> wsUnitDTO) {
 		this.wsUnitDTO = wsUnitDTO;
+	}
+	/**
+	 * @return the secondaryUnitID
+	 */
+	public int getSecondaryUnitID() {
+		return secondaryUnitID;
+	}
+	/**
+	 * @param secondaryUnitID the secondaryUnitID to set
+	 */
+	public void setSecondaryUnitID(int secondaryUnitID) {
+		this.secondaryUnitID = secondaryUnitID;
 	}
 	
 	

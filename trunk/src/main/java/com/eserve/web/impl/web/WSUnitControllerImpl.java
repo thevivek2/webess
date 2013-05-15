@@ -5,8 +5,11 @@
  */
 package com.eserve.web.impl.web;
 
+import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,7 +21,6 @@ import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.api.service.WSUnitService;
 import com.eserve.web.api.web.WSUnitController;
 import com.eserve.web.impl.common.WSCommonController;
-import com.eserve.web.impl.dto.WSItemDTO;
 import com.eserve.web.impl.dto.WSUnitDTO;
 
 /**
@@ -29,22 +31,28 @@ import com.eserve.web.impl.dto.WSUnitDTO;
 @Named("wsUnitController")
 @Scope("request")
 public class WSUnitControllerImpl extends WSCommonController implements
-		WSUnitController {
+		WSUnitController, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6933544254503421383L;
 
 	@Inject
 	@Named("wsUnitService")
 	WSUnitService service;
 
-	private int selectedType = 0;
+	private int selectedType;
 	private boolean simple = true;
 	private boolean compound;
+
+	private String test;
 
 	private WSUnitDTO model;
 	private List<WSDTO> models;
 
-	/**
-	 * @return the compound
-	 */
+	private boolean loadModel;
+
 	public boolean isCompound() {
 		return compound;
 	}
@@ -70,16 +78,14 @@ public class WSUnitControllerImpl extends WSCommonController implements
 
 	@Override
 	public void addUnit(ActionEvent event) {
-		if (isCompound()) {
-			System.out.println("Compound unit is going to be add");
+		model.setUnitDefineType(getSelectedType());
+		System.out.println("UNIT>>>>"+model.getUnitID());
+		System.out.println("Secondary Unit"+model.getSecondaryUnitID());
+		System.out.println(model.getUnitDesc());
+		service.saveModel(model);
+		setLoadModel(true);
+		model = getModel();
 
-		} else if (isSimple()) {
-			System.out.println("Adding Simple unit >>>>>> ");
-			service.saveModel(model);
-			model.setUnitName("");
-			model.setUnitDesc("");
-
-		}
 	}
 
 	/**
@@ -95,13 +101,7 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	 */
 	public void setSelectedType(int selectedType) {
 		this.selectedType = selectedType;
-		if (selectedType == 1) {
-			setCompound(true);
-			setSimple(false);
-		} else {
-			setCompound(false);
-			setSimple(true);
-		}
+
 	}
 
 	/*
@@ -142,7 +142,7 @@ public class WSUnitControllerImpl extends WSCommonController implements
 
 	@Override
 	public WSUnitDTO getModel() {
-		if (model == null) {
+		if (model == null || isLoadModel()) {
 			setModel(new WSUnitDTO());
 		}
 
@@ -156,6 +156,50 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	 */
 	public void setModel(WSUnitDTO model) {
 		this.model = service.getModel();
+	}
+
+	/**
+	 * @return the loadModel
+	 */
+	public boolean isLoadModel() {
+		return loadModel;
+	}
+
+	/**
+	 * @param loadModel
+	 *            the loadModel to set
+	 */
+	public void setLoadModel(boolean loadModel) {
+		this.loadModel = loadModel;
+	}
+
+	/**
+	 * @return the test
+	 */
+	public String getTest() {
+		return test;
+	}
+
+	/**
+	 * @param test
+	 *            the test to set
+	 */
+	public void setTest(String test) {
+		System.out.println("setting test>>>>>>>>>");
+		this.test = test;
+	}
+
+	@PostConstruct
+	public void init() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		String compound = context.getExternalContext().getRequestParameterMap()
+				.get("isCompound");
+		System.out
+				.println("post contruct called with >>>>>>>>>>>> " + compound);
+		if (compound != null && compound.equals("true")) {
+			this.compound = true;
+			this.simple = false;
+		}
 	}
 
 }

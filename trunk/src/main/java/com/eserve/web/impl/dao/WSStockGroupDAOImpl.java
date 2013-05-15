@@ -1,40 +1,81 @@
 package com.eserve.web.impl.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Named;
 
+import org.springframework.jdbc.core.RowMapper;
+
+import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.api.dao.WSStockGroupDAO;
 import com.eserve.web.impl.common.WSCommonDAO;
 import com.eserve.web.impl.dto.WSStockGroupDTO;
 
 /**
  * @author Vivek Adhikari
- *
+ * 
  */
 @Named("wsStockGroupDAO")
 public class WSStockGroupDAOImpl extends WSCommonDAO implements WSStockGroupDAO {
 
-	
-	public List<WSStockGroupDTO> getListOfCategory()
-	{
-		List<WSStockGroupDTO> listOfCategory= new ArrayList<WSStockGroupDTO>();
-		
-		WSStockGroupDTO dto= new WSStockGroupDTO();
-		dto.setID(2);
-		dto.setName("Stock Group 2");
-		listOfCategory.add(dto);
-		
-		WSStockGroupDTO dto1= new WSStockGroupDTO();
-		dto1.setID(3);
-		dto1.setName("Stock Group 3");
-		listOfCategory.add(dto1);
-		WSStockGroupDTO dto2= new WSStockGroupDTO();
-		dto2.setID(4);
-		dto2.setName("Stock Group 4");
-		listOfCategory.add(dto2);
-		return listOfCategory;
-		
+	public List<WSStockGroupDTO> getListOfCategory() {
+		return null;
+
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.eserve.web.api.dao.WSStockGroupDAO#getModel()
+	 */
+	@Override
+	public WSStockGroupDTO getModel() {
+		WSStockGroupDTO dto = new WSStockGroupDTO();
+		List<WSStockGroupDTO> list = new ArrayList<WSStockGroupDTO>();
+
+		RowMapper<WSStockGroupDTO> rowMapper = new RowMapper<WSStockGroupDTO>() {
+
+			@Override
+			public WSStockGroupDTO mapRow(ResultSet rs, int arg1)
+					throws SQLException {
+				WSStockGroupDTO dto = new WSStockGroupDTO();
+				dto.setGroupID(rs.getInt("groupID"));
+				dto.setName(rs.getString("name"));
+				return dto;
+			}
+		};
+		list = getJdbcTemplate().query(
+				"SELECT groupID,GetParentIDByID(groupID) as parentid , GetAncestry(groupID) as name  FROM Eserve_WAM_groups; ", rowMapper);
+		
+		if (list != null && list.size() > 0) {
+			dto.setGroups(list);
+		}
+		WSStockGroupDTO dto1 = new WSStockGroupDTO();
+		dto1.setGroupID(0);
+		dto1.setName("This is Parent");
+		list.add(dto1);
+		return dto;
+
+	}
+
+	@Override
+	public boolean saveModel(WSDTO model) {
+		if (model instanceof WSStockGroupDTO) {
+			System.out.println("saving group");
+			getJdbcTemplate()
+					.update("INSERT INTO Eserve_WAM_groups (name, alias,des, parentid,createdon) VALUES(?,?,?,?,?)",
+							new Object[] {
+									((WSStockGroupDTO) model).getName(),
+									((WSStockGroupDTO) model).getAlias(),
+									((WSStockGroupDTO) model).getDes(),
+									((WSStockGroupDTO) model).getParentID(),
+									new java.sql.Timestamp(new java.util.Date()
+											.getTime()) });
+		}
+		return true;
+	}
+
 }

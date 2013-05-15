@@ -19,46 +19,91 @@ public class WSStoreLocationDTO extends WSCommonDTO implements WSDTO  {
 
 	private static final long serialVersionUID = -5478098730334064201L;
 	
-	private int ID;
-	private String locationName;
-	private boolean isCurrentlyInUse;
+	private int locationID;
+	private String name;
+	private String code;
+	private boolean currentlyInUse=true;
+	private String address;
+	private String alias;
 	private Date createdOn;
 	private int createdBy;
+	
+	
+	
 	/**
-	 * @return the iD
+	 * @return the locationID
 	 */
-	public int getID() {
-		return ID;
+	public int getLocationID() {
+		return locationID;
 	}
 	/**
-	 * @param iD the iD to set
+	 * @param locationID the locationID to set
 	 */
-	public void setID(int iD) {
-		ID = iD;
+	public void setLocationID(int locationID) {
+		this.locationID = locationID;
+	}
+	
+	
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 	/**
-	 * @return the locationName
+	 * @param name the name to set
 	 */
-	public String getLocationName() {
-		return locationName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	/**
-	 * @param locationName the locationName to set
+	 * @return the code
 	 */
-	public void setLocationName(String locationName) {
-		this.locationName = locationName;
+	public String getCode() {
+		return code;
 	}
 	/**
-	 * @return the isCurrentlyInUse
+	 * @param code the code to set
+	 */
+	public void setCode(String code) {
+		this.code = code;
+	}
+	/**
+	 * @return the address
+	 */
+	public String getAddress() {
+		return address;
+	}
+	/**
+	 * @param address the address to set
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	/**
+	 * @return the alias
+	 */
+	public String getAlias() {
+		return alias;
+	}
+	/**
+	 * @param alias the alias to set
+	 */
+	public void setAlias(String alias) {
+		this.alias = alias;
+	}
+	/**
+	 * @return the currentlyInUse
 	 */
 	public boolean isCurrentlyInUse() {
-		return isCurrentlyInUse;
+		return currentlyInUse;
 	}
 	/**
-	 * @param isCurrentlyInUse the isCurrentlyInUse to set
+	 * @param currentlyInUse the currentlyInUse to set
 	 */
-	public void setCurrentlyInUse(boolean isCurrentlyInUse) {
-		this.isCurrentlyInUse = isCurrentlyInUse;
+	public void setCurrentlyInUse(boolean currentlyInUse) {
+		this.currentlyInUse = currentlyInUse;
 	}
 	/**
 	 * @return the createdOn
@@ -84,6 +129,7 @@ public class WSStoreLocationDTO extends WSCommonDTO implements WSDTO  {
 	public void setCreatedBy(int createdBy) {
 		this.createdBy = createdBy;
 	}
+	
 	
 	
 

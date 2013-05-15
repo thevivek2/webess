@@ -13,12 +13,12 @@
 	<listener-class>
 		org.springframework.web.context.ContextLoaderListener
 	</listener-class>  
-  </listener>  
+  </listener>      
   <listener>  
-	<listener-class>
+	<listener-class> 
 		org.springframework.web.context.request.RequestContextListener
 	</listener-class>
-  </listener>  
+  </listener>    
     
   <!-- Change to "Production" when you are ready to deploy -->
   

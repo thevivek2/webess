@@ -96,8 +96,8 @@ public class WSCommonController implements WSBaseController{
 	 * @see com.eserve.web.api.core.WSBaseController#addModel(javax.faces.event.ActionEvent, com.eserve.web.api.core.WSDTO)
 	 */
 	@Override
-	public void addModel(ActionEvent event, WSDTO model) {
-		// TODO Auto-generated method stub
+	public void addModel(ActionEvent event) {
+		System.out.println("hello");
 		
 	}
 

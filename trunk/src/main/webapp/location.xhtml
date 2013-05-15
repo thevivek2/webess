@@ -13,25 +13,52 @@
         <f:facet name="header">
             <h:outputText value="New Location "></h:outputText>
         </f:facet>
-        <rich:panel>
-        <h:panelGrid columns="2">
-            <h:outputText value="Locatation Name: "/>
-            <rich:inplaceInput  value=""  defaultLabel="Enter stock location" minInputWidth="150px;" />
-            <h:outputText value="location Alias:" />
-            <rich:inplaceInput  defaultLabel="Enter stock Alias"/>
+        <rich:panel id="AddLocationPanel">
+        <h:panelGrid columns="3">
+            <h:outputText value="Name: "/>
+            <rich:inplaceInput  id="locationAdd" required="true" value="#{wsLocationController.model.name}"  defaultLabel="Enter stock location" minInputWidth="150px;" />
+              <rich:message  for="locationAdd">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
+                    
+             <h:outputText value="Alias:" />
+            <rich:inplaceInput value="#{wsLocationController.model.alias}" defaultLabel="Enter stock Alias"/>
             
+            <rich:message  for="locationalias">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
             
-             
-           <h:outputText value="Address "/>
-           <rich:inplaceInput  defaultLabel="Enter location Address "/>
+            <h:outputText value="Code: "/>
+            <rich:inplaceInput value="#{wsLocationController.model.code}" defaultLabel="Enter location Code "/>
             
+            <rich:message  for="locationcode">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
+             <h:outputText value="Address: "/>
+            <rich:inplaceInput value="#{wsLocationController.model.address}" defaultLabel="Enter location Code "/>
             
-            <h:outputText value="Is Currently in Use :" />
-            <h:selectBooleanCheckbox value=""/>
+            <rich:message  for="locationaddress">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
+            <h:outputText value="Currently in Useful State :" />
+            <h:selectBooleanCheckbox value="#{wsLocationController.model.currentlyInUse}"/>
+            <rich:message  for="locationinuse">
+                        <f:facet name="errorMarker">
+                           
+                        </f:facet>
+                    </rich:message>
             
      </h:panelGrid>
      </rich:panel>
-      <a4j:commandButton type="submit" actionListener="#{wsUnitController.addUnit}" value="Save Location"  />
+       <a4j:commandButton id="addLocation" type="submit" actionListener="#{wsLocationController.addLocation}" value="Save Location" render="AddLocationPanel"  />
       </rich:panel>
 </h:form>
 </ui:define>

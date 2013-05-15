@@ -1,6 +1,7 @@
 package com.eserve.web.api.service;
 
 import com.eserve.web.api.core.WSBaseService;
+import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.impl.dto.WSStockGroupDTO;
 
 import java.util.List;
@@ -12,4 +13,10 @@ import java.util.List;
 public interface WSStockGroupService extends WSBaseService {
 
 	public List<WSStockGroupDTO> getAllGroups();
+	
+	public WSStockGroupDTO getModel();
+	
+	public List<WSDTO> getModels();
+	
+	
 }
