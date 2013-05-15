@@ -30,16 +30,16 @@
              
             <h:outputText value="Under (Group Name:) " />
               <rich:inplaceSelect defaultLabel="start typing for select" >
-               <f:selectItems value="#{wsItemController.model.wsStockGroupDTO}" var="product" 
-           itemLabel="#{product.name}" itemValue="#{product.ID}" />
+               <f:selectItems value="#{wsItemController.model.wsStockGroupDTO}" var="group" 
+           itemLabel="#{group.name}" itemValue="#{group.ID}" />
             </rich:inplaceSelect>
              <a4j:commandLink value=""  />
              
              
               <h:outputText value="Stock Location " />
               <rich:inplaceSelect defaultLabel="Start typing for select">
-               <f:selectItems value="#{wsItemController.model.wsStockGroupDTO}" var="product" 
-           itemLabel="#{product.name}" itemValue="#{product.ID}" />
+               <f:selectItems value="#{wsItemController.model.wsLocationDTOs}" var="loc" 
+           itemLabel="#{loc.name}" itemValue="#{loc.locationID}" />
             </rich:inplaceSelect>
              <a4j:commandLink value=""  />
              

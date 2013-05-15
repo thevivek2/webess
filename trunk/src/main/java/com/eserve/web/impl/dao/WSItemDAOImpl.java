@@ -28,11 +28,16 @@ public class WSItemDAOImpl  extends WSCommonDAO implements WSItemDAO{
 	@Named("wsStockGroupDAO")
 	WSStockGroupDAOImpl dao;
 	
+	@Inject
+	@Named("wsLocationDAO")
+	WSLocationDAOImpl locationDao;
+	
 	public List<WSDTO> getModels()
 	{
 		List<WSDTO> listModels = new ArrayList<WSDTO>();
 		WSItemDTO dto= new WSItemDTO();
-		dto.setWsStockGroupDTO(dao.getListOfCategory());
+		dto.setWsStockGroupDTO(dao.getGroups());
+		dto.setWsLocationDTOs(locationDao.getLocations());
 		listModels.add(dto);
 		return listModels;
 	}
