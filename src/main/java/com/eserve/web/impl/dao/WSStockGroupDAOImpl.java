@@ -34,6 +34,16 @@ public class WSStockGroupDAOImpl extends WSCommonDAO implements WSStockGroupDAO 
 	@Override
 	public WSStockGroupDTO getModel() {
 		WSStockGroupDTO dto = new WSStockGroupDTO();
+		WSStockGroupDTO dto1 = new WSStockGroupDTO();
+		dto1.setGroupID(0);
+		dto1.setName("This is Parent");
+		dto.setGroups(getGroups());
+		return dto;
+
+	}
+	
+	public List<WSStockGroupDTO> getGroups()
+	{
 		List<WSStockGroupDTO> list = new ArrayList<WSStockGroupDTO>();
 
 		RowMapper<WSStockGroupDTO> rowMapper = new RowMapper<WSStockGroupDTO>() {
@@ -49,16 +59,7 @@ public class WSStockGroupDAOImpl extends WSCommonDAO implements WSStockGroupDAO 
 		};
 		list = getJdbcTemplate().query(
 				"SELECT groupID,GetParentIDByID(groupID) as parentid , GetAncestry(groupID) as name  FROM Eserve_WAM_groups; ", rowMapper);
-		
-		if (list != null && list.size() > 0) {
-			dto.setGroups(list);
-		}
-		WSStockGroupDTO dto1 = new WSStockGroupDTO();
-		dto1.setGroupID(0);
-		dto1.setName("This is Parent");
-		list.add(dto1);
-		return dto;
-
+		return list;
 	}
 
 	@Override

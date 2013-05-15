@@ -21,7 +21,7 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 
 	
 	private List<WSStockGroupDTO> wsStockGroupDTO;
-	
+	private List<WSStoreLocationDTO> wsLocationDTOs;
 	private int ID;
 	private String itemName;
 	private String itemAlieas;
@@ -194,6 +194,20 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 	 */
 	public void setPriceUnit(int priceUnit) {
 		this.priceUnit = priceUnit;
+	}
+
+	/**
+	 * @return the wsLocationDTOs
+	 */
+	public List<WSStoreLocationDTO> getWsLocationDTOs() {
+		return wsLocationDTOs;
+	}
+
+	/**
+	 * @param wsLocationDTOs the wsLocationDTOs to set
+	 */
+	public void setWsLocationDTOs(List<WSStoreLocationDTO> wsLocationDTOs) {
+		this.wsLocationDTOs = wsLocationDTOs;
 	}
 
 
