@@ -1554,3 +1554,22 @@ width:100%;
             vertical-align:top;
         }
 
+
+
+
+.even-row {
+        background-color: #FCFFFE;
+        }
+ 
+ .odd-row {
+        background-color: #ECF3FE;
+        }
+ 
+.active-row {
+        background-color: #FFEBDA !important;
+        cursor: pointer;
+        }
+  
+  .stable{
+  width:600px;
+  }

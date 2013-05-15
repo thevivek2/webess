@@ -15,6 +15,7 @@ import com.eserve.web.api.dao.WSItemDAO;
 import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.impl.common.WSCommonDAO;
 import com.eserve.web.impl.dto.WSItemDTO;
+import com.eserve.web.impl.dto.WSUnitDTO;
 
 /**
  * @author Vivek Adhikari
@@ -32,12 +33,21 @@ public class WSItemDAOImpl  extends WSCommonDAO implements WSItemDAO{
 	@Named("wsLocationDAO")
 	WSLocationDAOImpl locationDao;
 	
-	public List<WSDTO> getModels()
+	@Inject
+	@Named("wsUnitDAO")
+	WSUnitDAOImpl unitDAOImpl;
+	
+	@Override
+	public List<WSDTO> getModels(WSDTO model)
 	{
 		List<WSDTO> listModels = new ArrayList<WSDTO>();
 		WSItemDTO dto= new WSItemDTO();
 		dto.setWsStockGroupDTO(dao.getGroups());
-		dto.setWsLocationDTOs(locationDao.getLocations());
+		dto.setWsLocationDTOs(locationDao.getLocations());	
+		WSItemDTO itemDTO= (WSItemDTO) model;
+		WSUnitDTO unitDTO = itemDTO.getUnitDTO();
+		List unitDTOList= unitDAOImpl.getModels(unitDTO);
+		dto.setWsUnitDTOs(unitDTOList);
 		listModels.add(dto);
 		return listModels;
 	}

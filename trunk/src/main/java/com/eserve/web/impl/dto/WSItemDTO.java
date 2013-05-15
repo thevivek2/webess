@@ -22,6 +22,25 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 	
 	private List<WSStockGroupDTO> wsStockGroupDTO;
 	private List<WSStoreLocationDTO> wsLocationDTOs;
+	private List<WSUnitDTO> wsUnitDTOs;
+	
+	private WSUnitDTO unitDTO;
+	private WSStockGroupDTO stockGroupDTO;
+	private WSStoreLocationDTO locationDTO;
+	/**
+	 * @return the unitDTO
+	 */
+	public WSUnitDTO getUnitDTO() {
+		return unitDTO;
+	}
+
+	/**
+	 * @param unitDTO the unitDTO to set
+	 */
+	public void setUnitDTO(WSUnitDTO unitDTO) {
+		this.unitDTO = unitDTO;
+	}
+
 	private int ID;
 	private String itemName;
 	private String itemAlieas;
@@ -209,6 +228,50 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 	public void setWsLocationDTOs(List<WSStoreLocationDTO> wsLocationDTOs) {
 		this.wsLocationDTOs = wsLocationDTOs;
 	}
+
+	/**
+	 * @return the wsUnitDTOs
+	 */
+	public List<WSUnitDTO> getWsUnitDTOs() {
+		return wsUnitDTOs;
+	}
+
+	/**
+	 * @param wsUnitDTOs the wsUnitDTOs to set
+	 */
+	public void setWsUnitDTOs(List<WSUnitDTO> wsUnitDTOs) {
+		this.wsUnitDTOs = wsUnitDTOs;
+	}
+
+	/**
+	 * @return the stockGroupDTO
+	 */
+	public WSStockGroupDTO getStockGroupDTO() {
+		return stockGroupDTO;
+	}
+
+	/**
+	 * @param stockGroupDTO the stockGroupDTO to set
+	 */
+	public void setStockGroupDTO(WSStockGroupDTO stockGroupDTO) {
+		this.stockGroupDTO = stockGroupDTO;
+	}
+
+	/**
+	 * @return the locationDTO
+	 */
+	public WSStoreLocationDTO getLocationDTO() {
+		return locationDTO;
+	}
+
+	/**
+	 * @param locationDTO the locationDTO to set
+	 */
+	public void setLocationDTO(WSStoreLocationDTO locationDTO) {
+		this.locationDTO = locationDTO;
+	}
+	
+	
 
 
 }

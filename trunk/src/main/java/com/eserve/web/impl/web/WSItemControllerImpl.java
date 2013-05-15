@@ -21,6 +21,7 @@ import com.eserve.web.api.service.WSItemService;
 import com.eserve.web.api.web.WSItemController;
 import com.eserve.web.impl.common.WSCommonController;
 import com.eserve.web.impl.dto.WSItemDTO;
+import com.eserve.web.impl.dto.WSUnitDTO;
 
 /**
  * @author Vivek Adhikari
@@ -39,6 +40,8 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 	
 	private WSItemDTO model;
 	private boolean loadModel;
+	
+	private boolean simpleUnit=true;
 	/* (non-Javadoc)
 	 * @see com.eserve.web.api.web.WSItemController#addItem(javax.faces.event.ActionEvent)
 	 */
@@ -54,14 +57,30 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 	
 	
 	
-	
+	public String showCompound() 
+	{
+		System.out.println("is simple unit "+isSimpleUnit());
+		return "";
+	}
 	/**
 	 * @return the model
 	 */
 	public WSItemDTO getModel() {
-		if(model==null)
+		if(model==null || isLoadModel())
 		{
-			setModel(new WSItemDTO());
+			WSItemDTO dto= new WSItemDTO();
+			WSUnitDTO unitDTO= new WSUnitDTO();
+			if(!isSimpleUnit())
+			{
+				unitDTO.setUnitDefineType(1);
+			}
+			else
+			{
+				unitDTO.setUnitDefineType(0);
+			}
+			
+			dto.setUnitDTO(unitDTO);
+			setModel(dto);
 		}
 		return model;
 	}
@@ -69,7 +88,7 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 	 * @param model the model to set
 	 */
 	public void setModel(WSItemDTO model) {
-		this.model=(WSItemDTO) service.getModels().get(0);
+		this.model=(WSItemDTO) service.getModels(model).get(0);
 		
 		
 	}
@@ -85,6 +104,26 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 	 */
 	public void setLoadModel(boolean loadModel) {
 		this.loadModel = loadModel;
+	}
+
+
+
+
+	/**
+	 * @return the simpleUnit
+	 */
+	public boolean isSimpleUnit() {
+		return simpleUnit;
+	}
+
+
+
+
+	/**
+	 * @param simpleUnit the simpleUnit to set
+	 */
+	public void setSimpleUnit(boolean simpleUnit) {
+		this.simpleUnit = simpleUnit;
 	}
 	
 	
