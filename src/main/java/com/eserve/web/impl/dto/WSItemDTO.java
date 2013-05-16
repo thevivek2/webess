@@ -5,7 +5,7 @@
  */
 package com.eserve.web.impl.dto;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import com.eserve.web.api.core.WSDTO;
@@ -41,33 +41,36 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 		this.unitDTO = unitDTO;
 	}
 
-	private int ID;
+	private int itemID;
 	private String itemName;
 	private String itemAlieas;
 	private Date createdOn;
-	private Date onStockFrom;
+	private Date availableDate;
 	private boolean hasImpactOnStock;
 	private boolean vat;
 	private int priceUnit;
 	private String createdBy;
     private long quantity;
+    private String des;
+    private String itemCode;
+    private int valuationType;
 
 	
 
+	
 	
 	/**
-	 * @return the iD
+	 * @return the itemID
 	 */
-	public int getID() {
-		return ID;
+	public int getItemID() {
+		return itemID;
 	}
 
 	/**
-	 * @param iD
-	 *            the iD to set
+	 * @param itemID the itemID to set
 	 */
-	public void setID(int iD) {
-		ID = iD;
+	public void setItemID(int itemID) {
+		this.itemID = itemID;
 	}
 
 	/**
@@ -159,20 +162,22 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 		this.wsStockGroupDTO = wsStockGroupDTO;
 	}
 
+	
+	
 	/**
-	 * @return the onStockFrom
+	 * @return the availableDate
 	 */
-	public Date getOnStockFrom() {
-		return onStockFrom;
+	public Date getAvailableDate() {
+		return availableDate;
 	}
 
 	/**
-	 * @param onStockFrom the onStockFrom to set
+	 * @param availableDate the availableDate to set
 	 */
-	public void setOnStockFrom(Date onStockFrom) {
-		this.onStockFrom = onStockFrom;
+	public void setAvailableDate(Date availableDate) {
+		this.availableDate = availableDate;
 	}
-	
+
 	/**
 	 * @return the hasImpactOnStock
 	 */
@@ -269,6 +274,48 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 	 */
 	public void setLocationDTO(WSStoreLocationDTO locationDTO) {
 		this.locationDTO = locationDTO;
+	}
+
+	/**
+	 * @return the des
+	 */
+	public String getDes() {
+		return des;
+	}
+
+	/**
+	 * @param des the des to set
+	 */
+	public void setDes(String des) {
+		this.des = des;
+	}
+
+	/**
+	 * @return the itemCode
+	 */
+	public String getItemCode() {
+		return itemCode;
+	}
+
+	/**
+	 * @param itemCode the itemCode to set
+	 */
+	public void setItemCode(String itemCode) {
+		this.itemCode = itemCode;
+	}
+
+	/**
+	 * @return the valuationType
+	 */
+	public int getValuationType() {
+		return valuationType;
+	}
+
+	/**
+	 * @param valuationType the valuationType to set
+	 */
+	public void setValuationType(int valuationType) {
+		this.valuationType = valuationType;
 	}
 	
 	

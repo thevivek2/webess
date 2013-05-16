@@ -7,9 +7,10 @@ CREATE TABLE Eserve_WAM_Items (
 	 Code CHAR(150) NULL,
 	 Alias CHAR(150) NULL,
 	 Des TEXT NULL,
+	 unitType TINYINT(1) NOT NULL,
 	 hasImpactOnStock TINYINT(1) NOT NULL, 
 	 valuationType TINYINT NOT NULL,
-	 procssedDate DATETIME ,
+	 createdDate DATETIME ,
 	 availableDate DATETIME,
 	 grupID mediumInt,
 	 PRIMARY KEY (itemID)

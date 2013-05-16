@@ -35,13 +35,12 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 	private static final long serialVersionUID = -8942245932409952875L;
 	
 	@Inject
-	@Named("wsItemService")
+	@Named("wsItemService")  
 	private WSItemService service;
 	
 	private WSItemDTO model;
 	private boolean loadModel;
-	
-	private boolean simpleUnit=true;
+		private boolean simpleUnit=true;
 	/* (non-Javadoc)
 	 * @see com.eserve.web.api.web.WSItemController#addItem(javax.faces.event.ActionEvent)
 	 */
@@ -51,6 +50,16 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 		System.out.println("User Want to add item having");
 		System.out.println("Name"+model.getItemName());
 		System.out.println("Alise"+model.getItemAlieas());
+		System.out.println("Available date"+model.getAvailableDate());
+		if(isSimpleUnit())
+		{
+		model.getUnitDTO().setUnitDefineType(0);
+		}
+		else
+		{
+		model.getUnitDTO().setUnitDefineType(1);	
+		}
+		service.saveModel(model);
 		model= new WSItemDTO();
 		
 	}
@@ -65,6 +74,7 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 	/**
 	 * @return the model
 	 */
+	@Override
 	public WSItemDTO getModel() {
 		if(model==null || isLoadModel())
 		{
@@ -82,6 +92,7 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 			dto.setUnitDTO(unitDTO);
 			setModel(dto);
 		}
+		
 		return model;
 	}
 	/**
@@ -125,6 +136,7 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 	public void setSimpleUnit(boolean simpleUnit) {
 		this.simpleUnit = simpleUnit;
 	}
+
 	
 	
 }

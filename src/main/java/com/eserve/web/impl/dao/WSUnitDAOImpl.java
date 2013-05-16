@@ -53,14 +53,12 @@ public class WSUnitDAOImpl extends WSCommonDAO implements WSUnitDAO {
 	@Override
 	public boolean saveModel(WSUnitDTO model) {
 		if (model.getUnitDefineType() == 0) {
-			System.out.println("Simple unit adding>>>>>>>");
 			getJdbcTemplate().update(
 					"INSERT INTO Eserve_WAM_units (Name, des) VALUES(?,?)",
 					new Object[] { model.getUnitName(), model.getUnitDesc() });
 		} else if (model.getUnitDefineType() == 1) {
-			System.out.println("Adding compound unit");
-			model.setUnitName(getUnitName(model.getUnitID()) + "of"
-					+ model.getTwoUnitsRelator()
+			model.setUnitName(getUnitName(model.getUnitID()) + " of "
+					+ model.getTwoUnitsRelator() +" "
 					+ getUnitName(model.getSecondaryUnitID()));
 			getJdbcTemplate()
 					.update("INSERT INTO Eserve_WAM_compoundunits (primaryunit, relator,secondaryunit, name,des) VALUES(?,?,?,?,?)",
