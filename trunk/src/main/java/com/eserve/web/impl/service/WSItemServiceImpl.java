@@ -41,5 +41,10 @@ public class WSItemServiceImpl extends WSCommonService implements WSItemService 
 		return dao.getModels(model);
 	}
 	
+	@Override
+	public boolean saveModel(WSDTO model)
+	{
+		return dao.saveModel(model);
+	}
 
 }

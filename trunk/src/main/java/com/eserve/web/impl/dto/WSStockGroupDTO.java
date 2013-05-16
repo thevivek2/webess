@@ -5,8 +5,11 @@ package com.eserve.web.impl.dto;
 
 import java.util.List;
 
+import javax.inject.Named;
+
 import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.impl.common.WSCommonDTO;
+
 
 public class WSStockGroupDTO  extends WSCommonDTO implements WSDTO {
 	

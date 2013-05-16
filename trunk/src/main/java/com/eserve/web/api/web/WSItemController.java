@@ -8,6 +8,7 @@ package com.eserve.web.api.web;
 import javax.faces.event.ActionEvent;
 
 import com.eserve.web.api.core.WSBaseController;
+import com.eserve.web.impl.dto.WSItemDTO;
 
 /**
  * @author Vivek Adhikari
@@ -16,5 +17,10 @@ import com.eserve.web.api.core.WSBaseController;
 public interface WSItemController extends WSBaseController {
 	
 	public void addItem(ActionEvent event);
+
+	/**
+	 * @return
+	 */
+	public WSItemDTO getModel();
 
 }

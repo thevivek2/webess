@@ -7,6 +7,8 @@ package com.eserve.web.impl.dto;
 
 import java.util.List;
 
+import javax.inject.Named;
+
 import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.impl.common.WSCommonDTO;
 
@@ -14,6 +16,7 @@ import com.eserve.web.impl.common.WSCommonDTO;
  * @author Vivek Adhikari
  *
  */
+
 public class WSUnitDTO  extends WSCommonDTO implements WSDTO {
 
 	private static final long serialVersionUID = -1127404152488419620L;

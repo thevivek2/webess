@@ -60,7 +60,7 @@ public class WSStockGroupDAOImpl extends WSCommonDAO implements WSStockGroupDAO 
 			}
 		};
 		list = getJdbcTemplate().query(
-				"SELECT groupID,GetParentIDByID(groupID) as parentid , GetAncestry(groupID) as name  FROM Eserve_WAM_groups; ", rowMapper);
+				"SELECT groupID, GetParentIDByID(groupID) as parentid , GetAncestry(groupID) as name  FROM Eserve_WAM_groups ", rowMapper);
 		return list;
 	}
 
