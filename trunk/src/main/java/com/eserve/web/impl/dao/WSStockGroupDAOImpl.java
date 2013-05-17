@@ -56,6 +56,7 @@ public class WSStockGroupDAOImpl extends WSCommonDAO implements WSStockGroupDAO 
 				WSStockGroupDTO dto = new WSStockGroupDTO();
 				dto.setGroupID(rs.getInt("groupID"));
 				dto.setName(rs.getString("name"));
+				dto.setParentID(rs.getInt("parentID"));
 				return dto;
 			}
 		};
