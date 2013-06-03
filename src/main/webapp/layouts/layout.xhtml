@@ -15,7 +15,9 @@
    
   <f:view contentType="text/html">
     <h:body>
-     <a4j:status onstart="#{rich:component('statPane')}.show()" onstop="#{rich:component('statPane')}.hide()" />
+   
+     <a4j:status onstart="#{rich:component('statPane')}.show()" onstop="#{rich:component('statPane')}.hide()" onerror="#{rich:component('errorPane')}.show()" />
+     
    <h:form>
    
 	<div id="page">
@@ -33,8 +35,7 @@
 	    </div> 
 	    
 	     <div id="nav-cal-right">
-		<ui:insert name="rightsidebar" >
-		  <ui:include src="/layouts/rightsidebar.xhtml" />
+		<ui:insert name="rightsidebar" >  
 		</ui:insert>
 	    </div> 
 	    
@@ -49,6 +50,10 @@
 	    	  <ui:include src="/layouts/footer.xhtml" />
 	    	 </ui:insert>
     	    </div>
+    	    
+    	    <div id="js">
+    	    <ui:insert name="js" />
+    	    </div>
  
         </div>
        
@@ -56,22 +61,32 @@
 		
 		 <rich:popupPanel id="statPane" modal="true" autosized="true">
             <h:graphicImage value="/images/ai.gif" alt="ai" />
-            Please wait...
+            Please wait ..............
         </rich:popupPanel>
+        
+         <rich:popupPanel id="errorPane" modal="true" autosized="true">
+         <f:facet name="header">
+            <h:outputText value="Oops ! Some error occured" />
+        </f:facet>
+        
+        <f:facet name="controls">
+            <h:outputLink value="#" onclick="#{rich:component('errorPane')}.hide(); return false;">
+                X
+            </h:outputLink>
+        </f:facet>
+        <p>
+            Please check your network.<br/> 
+            If still, there is same problem . please contact the Application Administration. 
+            <a href="#" onclick="#{rich:component('errorPane')}.hide()">Report an error </a>:
+            
+        </p>
+        </rich:popupPanel>
+        
+        
+      
 
-		<div id="_Loading" style="width: 350px; position: fixed; top: 200px; right: 500px; height: 45px; display: none; text-align:center; padding-top:10px" >
-		  <h:graphicImage value="/images/fetch.gif" />
-		<br />
-	  <h:outputText
-			value="Please wait while application is loading..." /></div>
- <script type="text/javascript">
- function hideLoadingMessage(){
-	 document.getElementById('_Loading').style.display='none';
-}
-function showLoadingMessage(){
-	document.getElementById('_Loading').style.display='block';
-}
-</script>
+		
+ 
 </h:form>
     </h:body>
     </f:view>

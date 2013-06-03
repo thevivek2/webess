@@ -36,7 +36,7 @@
                     
             
              <h:outputText value="Under" />
-             <rich:inplaceSelect id="parentgroupSelect" defaultLabel="--select--" value="#{wsStockGroupController.model.parentID}" openOnEdit="true">
+             <rich:inplaceSelect id="parentgroupSelect" listHeight="500px" listWidth="350px"  defaultLabel="--select--" value="#{wsStockGroupController.model.parentID}" openOnEdit="true">
                <f:selectItems value="#{wsStockGroupController.model.groups}" var="units" 
     		itemLabel="#{units.name}" itemValue="#{units.groupID}" />
             </rich:inplaceSelect>

@@ -15,28 +15,21 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-
 import org.springframework.stereotype.Repository;
 
 import com.eserve.web.api.core.WSDAO;
 import com.eserve.web.api.core.WSDTO;
 
-
 /**
  * @author Vivek Adhikari
- * @since Apr 8, 2013
- * This class is responsible for database trasition operation
+ * @since Apr 8, 2013 This class is responsible for database trasition operation
  */
 @Repository
 @Named("wsCommonDAO")
 public class WSCommonDAO implements WSDAO {
 
-	
-	
 	private JdbcTemplate jdbcTemplate;
-	
-	
-	
+
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		System.out.println(">>>> inside setDataSource");
@@ -51,13 +44,16 @@ public class WSCommonDAO implements WSDAO {
 	}
 
 	/**
-	 * @param jdbcTemplate the jdbcTemplate to set
+	 * @param jdbcTemplate
+	 *            the jdbcTemplate to set
 	 */
 	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.eserve.web.api.core.WSDAO#getModel(java.lang.String)
 	 */
 	@Override
@@ -66,15 +62,20 @@ public class WSCommonDAO implements WSDAO {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.eserve.web.api.core.WSDAO#saveModel(com.eserve.web.api.core.WSDTO)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.eserve.web.api.core.WSDAO#saveModel(com.eserve.web.api.core.WSDTO)
 	 */
 	@Override
 	public boolean saveModel(WSDTO model) {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.eserve.web.api.core.WSDAO#getModels()
 	 */
 	@Override
@@ -83,7 +84,9 @@ public class WSCommonDAO implements WSDAO {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.eserve.web.api.core.WSDAO#getModels(java.lang.String)
 	 */
 	@Override
@@ -92,8 +95,11 @@ public class WSCommonDAO implements WSDAO {
 		return null;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.eserve.web.api.core.WSDAO#updateModel(com.eserve.web.api.core.WSDTO)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.eserve.web.api.core.WSDAO#updateModel(com.eserve.web.api.core.WSDTO)
 	 */
 	@Override
 	public boolean updateModel(WSDTO model) {
@@ -101,8 +107,11 @@ public class WSCommonDAO implements WSDAO {
 		return false;
 	}
 
-	/* (non-Javadoc)
-	 * @see com.eserve.web.api.core.WSDAO#getModels(com.eserve.web.api.core.WSDTO)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.eserve.web.api.core.WSDAO#getModels(com.eserve.web.api.core.WSDTO)
 	 */
 	@Override
 	public List<WSDTO> getModels(WSDTO model) {
@@ -110,7 +119,9 @@ public class WSCommonDAO implements WSDAO {
 		return null;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.eserve.web.api.core.WSDAO#updateModels(java.util.List)
 	 */
 	@Override
@@ -119,7 +130,9 @@ public class WSCommonDAO implements WSDAO {
 		return false;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.eserve.web.api.core.WSDAO#getModelsForDropDown(java.util.List)
 	 */
 	@Override

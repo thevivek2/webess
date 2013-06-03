@@ -48,9 +48,23 @@ public class PageViewIdGenerator implements Serializable{
 		} else if (selectedPageViewId.equalsIgnoreCase("location")) {
 			includedPage = "location";
 		}
+
+		else if (selectedPageViewId.equalsIgnoreCase("global")) {
+			includedPage = "global";
+		}
+		
+		else if (selectedPageViewId.equalsIgnoreCase("displayItem")) {
+			includedPage = "displayItem";
+		}
+		
+		else if (selectedPageViewId.equalsIgnoreCase("sales")) {
+			includedPage = "sales";
+		}
+
 		else if (selectedPageViewId.equalsIgnoreCase("stockGroupDisplay")) {
 			includedPage = "stockGroupDisplay";
 		}
+
 		return "";
 	}
 

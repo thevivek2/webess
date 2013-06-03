@@ -1,139 +1,536 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:rich="http://richfaces.org/rich"
-    xmlns:c="http://java.sun.com/jstl/core"
-    xmlns:a4j="http://richfaces.org/a4j" template="layouts/layout.xhtml">
-   <ui:define name="content">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j" template="layouts/layout.xhtml">
+	<ui:define name="content">
+	
+		<a4j:outputPanel id="mypanel">
+			<rich:panel id="MyItemAddPanel">
+				
+				<rich:collapsiblePanel header="Configuration" switchType="client"
+					expanded="false">
+					<h:form>
+						<h:panelGrid columns="2" styleClass="configurationTable" columnClasses="configuration">
+						
+						   <h:outputText value="Use Alias for Stock item : "  />
+							<h:selectBooleanCheckbox value="#{wsItemController.model.itemPreferenceDTO.useAliasForItem}" />
 
-<rich:panel id="addingItem">
-        <f:facet name="header">
-            <h:outputText value="New Item "></h:outputText>
-        </f:facet>
-           <a4j:outputPanel id="MyItemAddPanel" >
-        <rich:panel>
-        <h:panelGrid columns="3">
 
-			<h:outputText value="Item Name: "/>
-            <rich:inplaceInput id="itemName" required="true" requiredMessage="Item Name Cannot be Empty " value="#{wsItemController.model.itemName}"  defaultLabel="Enter Item that you want to add"  />
-            <rich:message  for="itemName">
-                        <f:facet name="errorMarker">
-                           
-                        </f:facet>
-                    </rich:message>
-            
-            
-            <h:outputText value="Alise: " />
-            <rich:inplaceInput  id="itemAlias"  required="true" requiredMessage="Item Alias Cannot be Empty" value="#{wsItemController.model.itemAlieas}" defaultLabel="Item key word "  inputWidth="100"/>
-              <rich:message  for="itemAlias">
-                        <f:facet name="errorMarker">
-                           
-                        </f:facet>
-                    </rich:message>
-                    
-             
-               <h:outputText value="Code: " />
-            <rich:inplaceInput id="itemCode"  required="true"  requiredMessage="Item Code Cannot be Empty"  value="#{wsItemController.model.itemCode}" defaultLabel="Item key word "  inputWidth="100"/>
-             <rich:message  for="itemCode">
-                        <f:facet name="errorMarker">
-                           
-                        </f:facet>
-                    </rich:message>
+                            <h:outputText value="Use Code for Stock item : "  />
+							<h:selectBooleanCheckbox  value="#{wsItemController.model.itemPreferenceDTO.useCodeForItem}" />
+							  <h:outputText value="Use Description for Stock item : " />
+							<h:selectBooleanCheckbox  value="#{wsItemController.model.itemPreferenceDTO.useDescForItem}"/>
+							  <h:outputText value="Use Remarks for Stock item : " />
+							<h:selectBooleanCheckbox  />
+							  <h:outputText value="Allow Marked price for Stock item :" />
+							<h:selectBooleanCheckbox  value="#{wsItemController.model.itemPreferenceDTO.enaleMarekedPriceForItem}" />
+							
+							 <h:outputText value="Use Address for Godowns(Store location)" />
+							<h:selectBooleanCheckbox value="#{wsItemController.model.itemPreferenceDTO.enableGowDownsForItem}" />
+							
+							<h:outputText value="Use Vendor for Stock item " />
+							<h:selectBooleanCheckbox value="#{wsItemController.model.itemPreferenceDTO.enableVendorForItem}" />
+							
+							<h:outputText value="Enable Different Costing method :" />
+							<h:selectBooleanCheckbox value="#{wsItemController.model.itemPreferenceDTO.enableDifferentCostingType}" />
+							
+							
+							<h:outputText value="Number of Digit to use for roundUp : " />
+							<h:inputText size="3" id="digit" value="#{wsItemController.model.itemPreferenceDTO.roundUpDigit}" style="font-size:11px" />
 
-             
-            <h:outputText value="Under (Group Name:) " />
-              <rich:inplaceSelect label="Group" id="itemGroup"  required="true"  requiredMessage="Please select group" defaultLabel="--Start typing for select--" value="#{wsItemController.model.stockGroupDTO.groupID}">
-               <f:selectItems value="#{wsItemController.model.wsStockGroupDTO}" var="group" 
-           itemLabel="#{group.name}" itemValue="#{group.groupID}" />
-            </rich:inplaceSelect>
-              <rich:message  for="itemGroup">
-                        <f:facet name="errorMarker">
-                           
-                        </f:facet>
-                    </rich:message>
-             
-             
-              <h:outputText value="Stock Location " />
-              <rich:inplaceSelect  label="Location " id="itemLocation"  required="true"  requiredMessage="Required"  defaultLabel="--Select location-- " value="#{wsItemController.model.locationDTO.locationID}">
-               <f:selectItems value="#{wsItemController.model.wsLocationDTOs}" var="loc" 
-           itemLabel="#{loc.name}" itemValue="#{loc.locationID}" />
-            </rich:inplaceSelect>
-            <rich:message  for="itemLocation">
-                        <f:facet name="errorMarker">
-                           
-                        </f:facet>
-                    </rich:message>
-             
-             
-             
-             <h:outputText value="Select Unit Type" />
-                    <h:selectOneRadio value="#{wsItemController.simpleUnit}" >
-                         <a4j:ajax event="click" listener="#{wsItemController.showCompound}" render="primaryUnit"/>
-                        <f:selectItem itemLabel="Simple" itemValue="true" />
-                        <f:selectItem itemLabel="Compound" itemValue="false" />
-                    </h:selectOneRadio>
-              <a4j:commandLink value=""  />
+								
+							<h:outputText value="This ways configuration will done " />
+
+
+						</h:panelGrid>
+
+
+						<h:panelGrid columns="3">
+							<a4j:commandButton type="submit"
+								actionListener="#{wsItemController.updateUserPreference}"
+								render="mypanel" value="Apply" />
+
+
+						</h:panelGrid>
+					</h:form>
+				</rich:collapsiblePanel>
+				
+
+				<h:panelGrid styleClass="itemTableHeader" columns="3">
               
-              
-               <h:outputText value="Unit:" />
-                    <rich:inplaceSelect label="Unit" id="primaryUnit"   requiredMessage="Please select " required="true"  defaultLabel="--select--"  value="#{wsItemController.model.unitDTO.unitID}" 
-                     openOnEdit="true">
-               <f:selectItems value="#{wsItemController.model.wsUnitDTOs}" var="units" 
-    		itemLabel="#{units.unitName}" itemValue="#{units.unitID}" />
-            </rich:inplaceSelect>
-              <rich:message  for="primaryUnit">
-                        <f:facet name="errorMarker">
-                           
-                        </f:facet>
-                    </rich:message>
-              
-              
-        
-            <h:outputText value="Has impact on Stock Management :" />
-            <h:selectBooleanCheckbox value="#{wsItemController.model.hasImpactOnStock}"/>
-             <a4j:commandLink value="" />
-             
-              <h:outputText value=" Evalutaion Type :" />
-             <rich:inplaceSelect id="itemValuation" defaultLabel="--Select location-- "  value="#{wsItemController.model.valuationType}" >
-              <f:selectItem itemLabel="FIFO" itemValue="1" />
-              <f:selectItem itemLabel="LIFO" itemValue="2" />
-              <f:selectItem itemLabel="Average" itemValue="3" />
-              <f:selectItem itemLabel="Another" itemValue="4" />         
-             </rich:inplaceSelect>
-             <a4j:commandLink value="" />
-             
-             <h:outputText value="Available From :" />
-             
-             <rich:calendar value="#{wsItemController.model.availableDate}"
-                       popup="true"
-                       datePattern="dd/M/yy HH:mm"                      
-                       cellWidth="24px" cellHeight="22px" style="width:200px"/>
-             
-              <a4j:commandLink value=""  />
-              
-              
-            <h:outputText value="Is vat :" />
-            <h:selectBooleanCheckbox value="#{wsItemController.model.vat}"/>
-             <a4j:commandLink value=""  />
-             
-             <h:outputText value="Price :" />
-             <rich:inplaceInput  value="#{wsItemController.model.quantity}" inputWidth="100"/>
-             <a4j:commandLink value=""  />
-              
-             
-             <h:outputText value="Quantity :" />
-       		<rich:inplaceInput  value="#{wsItemController.model.quantity}" inputWidth="100"/>
-          	  <a4j:commandLink value=""  />
-            
            
-            
-            </h:panelGrid>
-          <!-- <rich:notifyMessages stayTime="2000" nonblocking="true" /> -->
-            </rich:panel>
-      <a4j:commandButton type="submit" actionListener="#{wsItemController.addItem}" value="Save Item" render="MyItemAddPanel"  />
-   </a4j:outputPanel>
- </rich:panel>
-</ui:define>
+
+					<h:outputText value="Item Name: " />
+					<h:inputText value="#{wsItemController.model.itemName}" id="item"
+						requiredMessage="Item Alias Cannot be Empty" required="true" style="font-size:15px" />
+					<h:inputHidden value="#{wsItemController.model.itemID}" id="itemHiddenField" />
+					
+
+
+
+
+					<h:outputText value="Alise: " rendered="#{wsItemController.model.itemPreferenceDTO.useAliasForItem}"/>
+					<rich:inplaceInput id="itemAlias" required="true"
+						requiredMessage="Item Alias Cannot be Empty"
+						value="#{wsItemController.model.itemAlias}"
+						defaultLabel="Item alias word " inputWidth="100" rendered="#{wsItemController.model.itemPreferenceDTO.useAliasForItem}" />
+					<rich:message for="itemAlias" rendered="#{wsItemController.model.itemPreferenceDTO.useAliasForItem}" />
+
+
+
+
+					<h:outputText value="Code: "  rendered="#{wsItemController.model.itemPreferenceDTO.useCodeForItem}"/>
+					<rich:inplaceInput id="itemCode" required="true" rendered="#{wsItemController.model.itemPreferenceDTO.useCodeForItem}"
+						requiredMessage="Item Code Cannot be Empty"
+						value="#{wsItemController.model.itemCode}"
+						defaultLabel="Item Code word " inputWidth="100" />
+					<rich:message for="itemCode" rendered="#{wsItemController.model.itemPreferenceDTO.useCodeForItem}" />
+
+
+
+					<h:outputText value="Desc:" rendered="#{wsItemController.model.itemPreferenceDTO.useDescForItem}" />
+					
+					<rich:inplaceInput name="hello" id="hello"
+						value="#{wsItemController.model.des}"
+						defaultLabel="Word you remeber" minInputWidth="150px;" rendered="#{wsItemController.model.itemPreferenceDTO.useDescForItem}" />
+					 <rich:message for="hello" rendered="#{wsItemController.model.itemPreferenceDTO.useDescForItem}" />
+					
+					<h:outputText value="Group :" />
+
+						<h:inputText id="group" />
+                  <h:inputHidden value="#{wsItemController.model.stockGroupDTO.groupID}" id="groupHiddenField" />
+
+
+
+					
+
+					<h:outputText value=" Costing Method :"/>
+					
+					<h:inputText id="itemValuation" />
+					<h:inputHidden value="#{wsItemController.model.costingType}" id="itemValuationHiddenField" />
+
+                     <rich:message for="itemValuation" />
+                     
+                     
+                     
+                       
+	
+
+
+				</h:panelGrid>
+				<h:panelGrid styleClass="itemTable1" columns="2"
+					columnClasses="ecol1, ecol2">
+
+
+					<h:panelGrid columns="4">
+
+
+
+
+
+						
+                        
+                        <h:outputText value="Impact on Stock:" />
+					<h:selectBooleanCheckbox
+						value="#{wsItemController.model.hasImpactOnStock}" />
+					<a4j:commandLink value="" />
+					<a4j:commandLink value="" />
+                        
+
+						<h:outputText value="Unit :" />
+						<h:inputText id="unit" value="Not Applicable" />
+						<rich:message for="unit" />
+						 <h:inputHidden value="#{wsItemController.model.unitDTO.unitID}" id="unitHiddenField" />
+						 
+						 	<h:outputText value="Marked Price :" />
+						<h:inputText id="mp" value="#{wsItemController.model.markedPrice}" />
+						<rich:message for="mp" />
+						 <h:inputHidden  id="mpHiddenField" />
+						
+
+						
+
+						
+
+
+
+
+
+					</h:panelGrid>
+					<h:panelGrid columns="3">
+
+
+						<h:outputText styleClass="Tax" value="Tax Information " />
+						<h:outputText value="" />
+						<h:outputText value="" />
+						
+						
+						<h:outputText value="Duty Fee:"/>
+						<h:inputText  value="#{wsItemController.model.dutyFee}" size="10"  />
+						
+
+
+					</h:panelGrid>
+
+
+
+
+
+
+
+				</h:panelGrid>
+
+				<h:panelGrid styleClass="itemTableFooter" columns="6">
+					<h:outputText styleClass="Total" value="Total Balance " />
+					<h:outputText value="Quantity: " />
+					<h:outputText value="Rate: " />
+					<h:outputText value="Per: " />
+					<h:outputText value=""  style="width:10px" />
+					
+					
+					<h:outputText value="Value:  " />
+
+					
+					<h:outputText value="" />
+					<h:inputText id="itemQuantity"
+						value="#{wsItemController.model.quantity}" required="true" style="width:40px"
+						requiredMessage="Not blank " />
+						
+						
+						
+					<h:inputText id="itemRate" value="#{wsItemController.model.unitPrice}"  style="width:40px"
+						requiredMessage="Not blank " />
+
+                   <h:inputText id="itemPerUnit"  style="width:80px" 
+						requiredMessage="Not blank " />
+						<h:inputHidden  id="itemPerUnitHiddenField"  />
+					
+
+					<h:inputText name="totalPrice" id="totalPrice" value="#{wsItemController.model.totalPrice}" style="width:70px"
+						minInputWidth="100px;" />
+
+
+				</h:panelGrid>
+
+
+ <h:panelGrid columns="3">
+				<a4j:commandButton type="submit" 
+					actionListener="#{wsItemController.addItem}"  onclick="validate()" value="Save Item"
+					render="myRightSidePanel mypanel" />
+				<h:outputText value="&#160;&#160;&#160;" />
+				<a4j:commandButton type="button"
+					actionListener="#{wsItemController.reSet}" value="Reset"
+					render="mypanel" immediate="true" />
+</h:panelGrid>
+
+			</rich:panel>
+
+
+      
+
+	<script type="text/javascript">
+		
+		   //<![CDATA[
+		              
+		          
+		
+		
+			jQuery(document).ready(function(e) {
+				
+				
+				
+				
+				
+				var HideAndShowElements = new Array();
+				var hideAndShow= [#{rich:element('group')}, #{rich:element('groupHiddenField')},    #{rich:element('allGroups')}];
+				var hideAndShow1= [#{rich:element('unit')}, #{rich:element('unitHiddenField')},        #{rich:element('allUnits')}];
+				var hideAndShow2= [#{rich:element('itemValuation')}, #{rich:element('itemValuationHiddenField')}, #{rich:element('allItemValuation')}];
+				var hideAndShow3= [#{rich:element('unitM')}, #{rich:element('unitMHiddenField')},        #{rich:element('allUnits1')}];
+				var hideAndShow4= [#{rich:element('item')}, #{rich:element('itemHiddenField')},        #{rich:element('allItems')}];
+				var hideAndShow5= [#{rich:element('itemPerUnit')}, #{rich:element('itemPerUnitHiddenField')},        #{rich:element('allItemsPerUnit')}];
+				
+				
+				jQuery(hideAndShow[0]).val("");
+				jQuery(hideAndShow1[0]).val("");
+				jQuery(hideAndShow2[0]).val("");
+				jQuery(hideAndShow3[0]).val("Not Applicable");
+				jQuery(hideAndShow4[0]).val("");
+				jQuery(hideAndShow5[0]).val("");
+				
+
+				jQuery(hideAndShow[0]).click(function() {
+
+					jQuery(hideAndShow[2]).show();
+					jQuery(hideAndShow1[2]).hide();
+					jQuery(hideAndShow2[2]).hide();
+					jQuery(hideAndShow3[2]).hide();
+					jQuery(hideAndShow4[2]).hide();
+					jQuery(hideAndShow5[2]).hide();
+
+				});
+
+				jQuery(hideAndShow[2]).click(function() {
+
+					var id = jQuery(this).val();
+					var text = jQuery(this).find(':selected').text();
+
+					jQuery(hideAndShow[0]).val(text);
+					jQuery(hideAndShow[1]).val(id);
+
+				});
+
+				jQuery(hideAndShow1[0]).click(function() {
+
+					jQuery(hideAndShow1[2]).show();
+					jQuery(hideAndShow[2]).hide();
+					jQuery(hideAndShow2[2]).hide();
+					jQuery(hideAndShow3[2]).hide();
+					jQuery(hideAndShow4[2]).hide();
+					jQuery(hideAndShow5[2]).hide();
+
+				});
+
+				jQuery(hideAndShow1[2]).click(function() {
+
+					var id = jQuery(this).val();
+					var text = jQuery(this).find(':selected').text();
+					jQuery(hideAndShow1[0]).val(text);
+					jQuery(hideAndShow1[1]).val(id);
+
+				});
+
+				jQuery(hideAndShow2[0]).click(function() {
+
+					jQuery(hideAndShow2[2]).show();
+					jQuery(hideAndShow[2]).hide();
+					jQuery(hideAndShow1[2]).hide();
+					jQuery(hideAndShow3[2]).hide();
+					jQuery(hideAndShow4[2]).hide();
+					jQuery(hideAndShow5[2]).hide();
+
+				});
+
+				jQuery(hideAndShow2[2]).click(function() {
+
+					var id = jQuery(this).val();
+					var text = jQuery(this).find(':selected').text();
+					jQuery(hideAndShow2[0]).val(text);
+					jQuery(hideAndShow2[1]).val(id);
+
+				});
+
+				jQuery(hideAndShow3[0]).click(function() {
+
+					jQuery(hideAndShow3[2]).show();
+					jQuery(hideAndShow[2]).hide();
+					jQuery(hideAndShow1[2]).hide();
+					jQuery(hideAndShow2[2]).hide();
+					jQuery(hideAndShow4[2]).hide();
+					jQuery(hideAndShow5[2]).hide();
+
+				});
+
+				jQuery(hideAndShow3[2]).click(function() {
+
+					var id = jQuery(this).val();
+					var text = jQuery(this).find(':selected').text();
+					jQuery(hideAndShow3[0]).val(text);
+					jQuery(hideAndShow3[1]).val(id);
+
+				});
+
+				jQuery(hideAndShow4[0]).click(function() {
+
+					jQuery(hideAndShow4[2]).show();
+					jQuery(hideAndShow[2]).hide();
+					jQuery(hideAndShow1[2]).hide();
+					jQuery(hideAndShow2[2]).hide();
+					jQuery(hideAndShow3[2]).hide();
+					jQuery(hideAndShow5[2]).hide();
+
+				});
+
+				jQuery(hideAndShow4[2]).click(function() {
+
+					var id = jQuery(this).val();
+					var text = jQuery(this).find(':selected').text();
+					jQuery(hideAndShow4[0]).val(text);
+					jQuery(hideAndShow4[1]).val(id);
+
+				});
+				
+				jQuery(hideAndShow5[0]).click(function() {
+
+					jQuery(hideAndShow5[2]).show();
+					jQuery(hideAndShow[2]).hide();
+					jQuery(hideAndShow1[2]).hide();
+					jQuery(hideAndShow2[2]).hide();
+					jQuery(hideAndShow3[2]).hide();
+					jQuery(hideAndShow4[2]).hide();
+
+				});
+
+				jQuery(hideAndShow5[2]).click(function() {
+
+					var id = jQuery(this).val();
+					var text = jQuery(this).find(':selected').text();
+					jQuery(hideAndShow5[0]).val(text);
+					jQuery(hideAndShow5[1]).val(id);
+
+				});
+				
+				
+				/* this is the method which evaluated the total value from item quantity and unit price */
+
+				
+				var itemQuantity=#{rich:element('itemQuantity')};
+				var ratePerUnit=#{rich:element('itemRate')};
+				var totalPrice=#{rich:element('totalPrice')};
+				jQuery(itemQuantity).keyup(function() {
+					
+
+					var  quantity=jQuery(itemQuantity).val(); 
+					var unitRate=jQuery(ratePerUnit).val();
+					var tprice=jQuery(totalPrice).val();
+				    
+					var calPrice=unitRate * quantity;
+					
+					
+						jQuery(totalPrice).val(calPrice);
+						
+						
+					
+					
+				});
+				
+				
+				jQuery(ratePerUnit).keyup(function() {
+					
+
+					var  quantity=jQuery(itemQuantity).val(); 
+					var unitRate=jQuery(ratePerUnit).val();
+					var tprice=jQuery(totalPrice).val();
+				    
+					var calPrice=unitRate * quantity;
+					
+					
+						jQuery(totalPrice).val(calPrice);
+						
+										
+					
+					
+				});
+				
+					jQuery(totalPrice).keyup(function() {
+					
+
+					var  quantity=jQuery(itemQuantity).val(); 
+					var unitRate=jQuery(ratePerUnit).val();
+					var tprice=jQuery(totalPrice).val();
+				    
+					var calPrice=unitRate * quantity;
+					var calRate= tprice / quantity;
+					
+					
+						jQuery(ratePerUnit).val(calRate);
+						
+						
+						
+						
+					
+					
+				});
+
+
+				
+
+			});
+		
+		
+		
+		function validate()
+		{
+			var textSelected= jQuery(#{rich:element('allItems')}).find(':selected').text();
+			var textInput=jQuery(#{rich:element('item')}).val();
+			var id=jQuery(#{rich:element('itemHiddenField')}).val();
+			
+			if(textSelected != textInput)
+				{
+				//alert("differnet");
+				jQuery(#{rich:element('itemHiddenField')}).val("");
+				}
+			else
+				{
+				//alert("same");
+				
+				}
+		}
+		         
+		
+		              
+		  //]]>
+		
+</script>
+
+
+		</a4j:outputPanel>
+
+
+	</ui:define>
+	<ui:define name="rightsidebar">
+
+	<a4j:outputPanel id="myRightSidePanel">
+
+
+             <h:selectOneListbox  id="allItems"
+				styleClass="mycustomscroll"   style="display:none" >
+				<f:selectItems  styleClass="test" value="#{wsItemController.model.wsItemDTOs}"
+					var="items" itemLabel="#{items.itemName}" itemValue="#{items.itemID}" />
+			</h:selectOneListbox>
+			
+
+			<h:selectOneListbox  id="allGroups"
+				styleClass="mycustomscroll" style="display:none">
+				<f:selectItems  value="#{wsItemController.model.wsStockGroupDTOs}"
+					var="group" itemLabel="#{group.name}" itemValue="#{group.groupID}" />
+			</h:selectOneListbox>
+			
+			
+			
+			<h:selectOneListbox styleClass="mycustomscroll" label="allUnits" id="allUnits"  style="display:none" >
+						<f:selectItems value="#{wsItemController.model.wsUnitDTOs}"
+							var="unit" itemLabel="#{unit.unitName}"
+							itemValue="#{unit.unitID}" />
+					</h:selectOneListbox>
+					
+					<h:selectOneListbox styleClass="mycustomscroll"  id="allItemsPerUnit"  style="display:none" >
+						<f:selectItems value="#{wsItemController.model.wsUnitDTOs}"
+							var="unit" itemLabel="#{unit.unitName}"
+							itemValue="#{unit.unitID}" />
+					</h:selectOneListbox>
+					
+			
+			<h:selectOneListbox id="allItemValuation"  styleClass="mycustomscroll" 
+			style="display:none"  >
+						<f:selectItem itemLabel="FIFO" itemValue="1" />
+						<f:selectItem itemLabel="LIFO" itemValue="2" />
+						<f:selectItem itemLabel="Average" itemValue="3" />
+						<f:selectItem itemLabel="Other" itemValue="4" />
+					</h:selectOneListbox>
+					
+					
+					
+				
+</a4j:outputPanel>
+
+		
+	</ui:define>
+
+	<ui:define name="js">
+
+	</ui:define>
 </ui:composition>

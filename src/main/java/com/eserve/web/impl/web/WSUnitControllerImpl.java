@@ -79,9 +79,6 @@ public class WSUnitControllerImpl extends WSCommonController implements
 	@Override
 	public void addUnit(ActionEvent event) {
 		model.setUnitDefineType(getSelectedType());
-		System.out.println("UNIT>>>>"+model.getUnitID());
-		System.out.println("Secondary Unit"+model.getSecondaryUnitID());
-		System.out.println(model.getUnitDesc());
 		service.saveModel(model);
 		setLoadModel(true);
 		model = getModel();

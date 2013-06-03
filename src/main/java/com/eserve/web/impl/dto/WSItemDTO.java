@@ -5,6 +5,7 @@
  */
 package com.eserve.web.impl.dto;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -20,13 +21,19 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 	private static final long serialVersionUID = -8942317932409952875L;
 
 	
-	private List<WSStockGroupDTO> wsStockGroupDTO;
+	private List<WSStockGroupDTO> wsStockGroupDTOs;
 	private List<WSStoreLocationDTO> wsLocationDTOs;
 	private List<WSUnitDTO> wsUnitDTOs;
+	
+	private List<WSItemDTO> wsItemDTOs;
 	
 	private WSUnitDTO unitDTO;
 	private WSStockGroupDTO stockGroupDTO;
 	private WSStoreLocationDTO locationDTO;
+	
+	private WSItemDTO wsItemDTO;
+	
+	private WSItemPreferenceDTO itemPreferenceDTO;
 	/**
 	 * @return the unitDTO
 	 */
@@ -40,24 +47,48 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 	public void setUnitDTO(WSUnitDTO unitDTO) {
 		this.unitDTO = unitDTO;
 	}
+	
+	
+	private boolean listAllItems;
 
 	private int itemID;
 	private String itemName;
-	private String itemAlieas;
+	private String itemAlias;
+	private String des;
+    private String itemCode;
 	private Date createdOn;
 	private Date availableDate;
 	private boolean hasImpactOnStock;
-	private boolean vat;
-	private int priceUnit;
+	private boolean vatApplicable;
 	private String createdBy;
-    private long quantity;
-    private String des;
-    private String itemCode;
-    private int valuationType;
+    private long quantity=1;
+    private int costingType;
+    
+    
+    private float unitPrice;
+    private BigDecimal markedPrice;
+    private BigDecimal totalPrice;
+    
+    private float dutyFee;
+    
+    
+    private int vendor;
+
 
 	
 
 	
+
+    public  Object getPropertyValue(String propertyName){
+    	
+    	if(propertyName.equalsIgnoreCase("totalPrice"))
+    	{
+    		return this.totalPrice;
+    	}
+    	
+    	return null;
+    	
+    }
 	
 	/**
 	 * @return the itemID
@@ -88,19 +119,19 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 		this.itemName = itemName;
 	}
 
+	
 	/**
-	 * @return the itemAlieas
+	 * @return the itemAlias
 	 */
-	public String getItemAlieas() {
-		return itemAlieas;
+	public String getItemAlias() {
+		return itemAlias;
 	}
 
 	/**
-	 * @param itemAlieas
-	 *            the itemAlieas to set
+	 * @param itemAlias the itemAlias to set
 	 */
-	public void setItemAlieas(String itemAlieas) {
-		this.itemAlieas = itemAlieas;
+	public void setItemAlias(String itemAlias) {
+		this.itemAlias = itemAlias;
 	}
 
 	/**
@@ -148,22 +179,24 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 		this.quantity = quantity;
 	}
 
-	/**
-	 * @return the wsStockGroupDTO
-	 */
-	public List<WSStockGroupDTO> getWsStockGroupDTO() {
-		return wsStockGroupDTO;
-	}
-
-	/**
-	 * @param wsStockGroupDTO the wsStockGroupDTO to set
-	 */
-	public void setWsStockGroupDTO(List<WSStockGroupDTO> wsStockGroupDTO) {
-		this.wsStockGroupDTO = wsStockGroupDTO;
-	}
+	
 
 	
 	
+	/**
+	 * @return the wsStockGroupDTOs
+	 */
+	public List<WSStockGroupDTO> getWsStockGroupDTOs() {
+		return wsStockGroupDTOs;
+	}
+
+	/**
+	 * @param wsStockGroupDTOs the wsStockGroupDTOs to set
+	 */
+	public void setWsStockGroupDTOs(List<WSStockGroupDTO> wsStockGroupDTOs) {
+		this.wsStockGroupDTOs = wsStockGroupDTOs;
+	}
+
 	/**
 	 * @return the availableDate
 	 */
@@ -192,32 +225,22 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 		this.hasImpactOnStock = hasImpactOnStock;
 	}
 
+	
+
+	
+
 	/**
-	 * @return the vat
+	 * @return the vatApplicable
 	 */
-	public boolean isVat() {
-		return vat;
+	public boolean isVatApplicable() {
+		return vatApplicable;
 	}
 
 	/**
-	 * @param vat the vat to set
+	 * @param vatApplicable the vatApplicable to set
 	 */
-	public void setVat(boolean vat) {
-		this.vat = vat;
-	}
-
-	/**
-	 * @return the priceUnit
-	 */
-	public int getPriceUnit() {
-		return priceUnit;
-	}
-
-	/**
-	 * @param priceUnit the priceUnit to set
-	 */
-	public void setPriceUnit(int priceUnit) {
-		this.priceUnit = priceUnit;
+	public void setVatApplicable(boolean vatApplicable) {
+		this.vatApplicable = vatApplicable;
 	}
 
 	/**
@@ -304,19 +327,146 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 		this.itemCode = itemCode;
 	}
 
+	
+
 	/**
-	 * @return the valuationType
+	 * @return the costingType
 	 */
-	public int getValuationType() {
-		return valuationType;
+	public int getCostingType() {
+		return costingType;
 	}
 
 	/**
-	 * @param valuationType the valuationType to set
+	 * @param costingType the costingType to set
 	 */
-	public void setValuationType(int valuationType) {
-		this.valuationType = valuationType;
+	public void setCostingType(int costingType) {
+		this.costingType = costingType;
 	}
+
+	/**
+	 * @return the wsItemDTOs
+	 */
+	public List<WSItemDTO> getWsItemDTOs() {
+		return wsItemDTOs;
+	}
+
+	/**
+	 * @param wsItemDTOs the wsItemDTOs to set
+	 */
+	public void setWsItemDTOs(List<WSItemDTO> wsItemDTOs) {
+		this.wsItemDTOs = wsItemDTOs;
+	}
+
+	/**
+	 * @return the wsItemDTO
+	 */
+	public WSItemDTO getWsItemDTO() {
+		return wsItemDTO;
+	}
+
+	/**
+	 * @param wsItemDTO the wsItemDTO to set
+	 */
+	public void setWsItemDTO(WSItemDTO wsItemDTO) {
+		this.wsItemDTO = wsItemDTO;
+	}
+
+	/**
+	 * @return the listAllItems
+	 */
+	public boolean isListAllItems() {
+		return listAllItems;
+	}
+
+	/**
+	 * @param listAllItems the listAllItems to set
+	 */
+	public void setListAllItems(boolean listAllItems) {
+		this.listAllItems = listAllItems;
+	}
+
+	/**
+	 * @return the unitPrice
+	 */
+	public float getUnitPrice() {
+		return unitPrice;
+	}
+
+	/**
+	 * @param unitPrice the unitPrice to set
+	 */
+	public void setUnitPrice(float unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+
+	
+
+	
+
+	/**
+	 * @return the markedPrice
+	 */
+	public BigDecimal getMarkedPrice() {
+		return markedPrice;
+	}
+
+	/**
+	 * @param markedPrice the markedPrice to set
+	 */
+	public void setMarkedPrice(BigDecimal markedPrice) {
+		this.markedPrice = markedPrice;
+	}
+
+	/**
+	 * @return the totalPrice
+	 */
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
+	/**
+	 * @param totalPrice the totalPrice to set
+	 */
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	/**
+	 * @return the vendor
+	 */
+	public int getVendor() {
+		return vendor;
+	}
+
+	/**
+	 * @param vendor the vendor to set
+	 */
+	public void setVendor(int vendor) {
+		this.vendor = vendor;
+	}
+
+	public float getDutyFee() {
+		return dutyFee;
+	}
+
+	public void setDutyFee(float dutyFee) {
+		this.dutyFee = dutyFee;
+	}
+
+	/**
+	 * @return the itemPreferenceDTO
+	 */
+	public WSItemPreferenceDTO getItemPreferenceDTO() {
+		return itemPreferenceDTO;
+	}
+
+	/**
+	 * @param itemPreferenceDTO the itemPreferenceDTO to set
+	 */
+	public void setItemPreferenceDTO(WSItemPreferenceDTO itemPreferenceDTO) {
+		this.itemPreferenceDTO = itemPreferenceDTO;
+	}
+	
 	
 	
 

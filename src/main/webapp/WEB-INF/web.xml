@@ -49,7 +49,7 @@
  <!--  <servlet-mapping>
     <servlet-name>facesServlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
-  </servlet-mapping> -->
+  </servlet-mapping> -->  
   
   <servlet-mapping>
     <servlet-name>facesServlet</servlet-name>
@@ -60,7 +60,10 @@
     <context-param>
       <param-name>org.richfaces.skin</param-name>
       <param-value>wine</param-value>
+      
     </context-param>
+    
+  
     
    <!-- after enabling this, all the resources of rich faces are loaded in start of the application -->
 <context-param>
@@ -73,6 +76,7 @@
 <listener>
  <listener-class>com.sun.faces.config.ConfigureListener</listener-class>
  </listener>
+ 
  
 
  

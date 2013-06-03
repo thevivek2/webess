@@ -56,5 +56,12 @@ public class WSUnitServiceImpl extends WSCommonService implements WSUnitService 
 	}
 	
 	
+	@Override
+	public List<WSDTO> getModels(WSDTO model)
+	{
+		return dao.getModels(model);
+	}
+	
+	
 	
 }

@@ -7,7 +7,6 @@ CREATE TABLE Eserve_WAM_Items (
 	 Code CHAR(150) NULL,
 	 Alias CHAR(150) NULL,
 	 Des TEXT NULL,
-	 unitType TINYINT(1) NOT NULL,
 	 hasImpactOnStock TINYINT(1) NOT NULL, 
 	 valuationType TINYINT NOT NULL,
 	 createdDate DATETIME ,
@@ -15,6 +14,88 @@ CREATE TABLE Eserve_WAM_Items (
 	 grupID mediumInt,
 	 PRIMARY KEY (itemID)
 ) ENGINE=MyISAM;
+
+
+
+CREATE TABLE Eserve_WAM_Items (
+     itemID mediumint   NOT NULL AUTO_INCREMENT,
+     Name CHAR(150) NOT NULL,
+	 Code CHAR(150) NULL,
+	 Alias CHAR(150) NULL,
+	 Des TEXT NULL,
+	 groupID mediumInt not null, 
+	 hasImpactOnStock TINYINT(1) NOT NULL, 
+	 CostingType TINYINT NOT NULL,
+	 createdBy mediumInt not null  ,
+	 createdOn DateTime not null ,
+	 PRIMARY KEY (itemID)
+) ENGINE=MyISAM;
+
+
+
+
+
+
+
+
+create Table Eserve_WAM_StockIn
+(
+	 StockInID mediumint   NOT NULL AUTO_INCREMENT,
+	 itemid mediumint not null,
+     billedquantity float null,
+     actualquantity float not null,	 
+     unitType TINYINT(1) NOT NULL,
+	 Unit mediumInt not null,
+	 unitprice float not null,
+	 markedprice float null,
+	 totalprice float not null,
+	 vendor mediumint null,
+	 dutyfee float null,
+	 stockInON dateTime not null,
+	 createdBy mediumInt not null, 
+	 PRIMARY KEY (StockInID)
+)ENGINE=MyISAM;
+
+
+
+create Table Eserve_WAM_StockOut
+(
+	 StockOutID mediumint   NOT NULL AUTO_INCREMENT,
+	 itemid mediumint not null,
+    
+     unitType TINYINT(1) NOT NULL,
+	 Unit mediumInt not null,
+    quantity float not null,	 
+	 rate float not null,
+	 totalprice float null,
+	
+	 vat float null,
+	 tax float null,
+    discount float null,
+	 actualtotalprice float not null,
+	 stockOutON dateTime not null,
+	 createdBy mediumInt not null, 
+	 PRIMARY KEY (StockOutID)
+)ENGINE=MyISAM;
+
+
+create table Eserve_WAM_StockOut_Summary
+(
+	 stockoutSummaryID mediumint   NOT NULL AUTO_INCREMENT,
+	 actualtotalprice float not null,
+	 stockOutON dateTime not null,
+	 createdBy mediumInt not null, 
+	 PRIMARY KEY (stockoutSummaryID)
+)ENGINE=MyISAM;
+
+
+
+
+
+
+
+
+
 
 
 CREATE TABLE Eserve_WAM_units (

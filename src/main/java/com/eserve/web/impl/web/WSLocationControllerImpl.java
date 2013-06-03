@@ -35,7 +35,6 @@ public class WSLocationControllerImpl extends WSCommonController implements WSLo
 	
 	@Override
 	public void addLocation(ActionEvent event) {
-		System.out.println("adding location >>>>");
 		service.saveModel(model);
 		this.model=new WSStoreLocationDTO();
 		

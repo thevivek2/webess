@@ -7,7 +7,6 @@ package com.eserve.web.impl.dto;
 
 import java.sql.Date;
 
-import javax.inject.Named;
 
 import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.impl.common.WSCommonDTO;
@@ -22,7 +21,7 @@ public class WSStoreLocationDTO extends WSCommonDTO implements WSDTO  {
 
 	private static final long serialVersionUID = -5478098730334064201L;
 	
-	private int locationID=0;
+	private int locationID=1;
 	private String name;
 	private String code;
 	private boolean currentlyInUse=true;

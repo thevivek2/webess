@@ -109,9 +109,6 @@ public class WSLogDAOImpl extends WSCommonDAO implements WSLogDAO {
 			wsLogDTO9.setLoggedBy("Vivek Adhikari");
 			allLogs.add(wsLogDTO9);
 			
-	
-		
-		System.out.println("DAO retruning the rquest with DTO");
 		return allLogs;
 	}
 	
