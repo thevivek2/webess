@@ -7,110 +7,98 @@
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:a4j="http://richfaces.org/a4j">
 
-
-	<rich:panelMenu topGroupExpandedRightIcon="chevronUp"
-		topGroupCollapsedRightIcon="chevronDown" groupExpandedLeftIcon="disc"
-		groupCollapsedLeftIcon="disc" style="width:190px"
-		activeItem="#{pageViewIdGenerator.includedPage}">
-		<rich:panelMenuGroup label="Account">
-			<rich:panelMenuItem label="Groups">
-				<f:param value="account" name="pageViewId" />
-			</rich:panelMenuItem>
-			<rich:panelMenuItem label="Another " />
-			<rich:panelMenuItem label="Another" />
-		</rich:panelMenuGroup>
-		<rich:panelMenuGroup label="Inventory">
-			<rich:panelMenuGroup label="Stock Groups">
-				<rich:panelMenuItem name="CreateStockGroup" itemMode="ajax"
-					label="Create"
-					actionListener="#{pageViewIdGenerator.getSideBarAction}"
-					action="stockgroups">
-					<f:param value="CreateStockGroup" name="pageViewId" />
-				</rich:panelMenuItem>
-				<rich:panelMenuItem label="Alter" />
-				<rich:panelMenuItem name="stockGroupDisplay" label="Display" itemMode="ajax"
-					actionListener="#{pageViewIdGenerator.getSideBarAction}"
-					action="stockGroupDisplay">
-					<f:param value="stockGroupDisplay" name="pageViewId" />
-				</rich:panelMenuItem>
-				<rich:panelMenuItem label="Delete" />
-			</rich:panelMenuGroup>
-
-			<rich:panelMenuGroup label="Items">
-				<rich:panelMenuItem name="createItem" itemMode="ajax" label="Create"
-					actionListener="#{pageViewIdGenerator.getSideBarAction}"
-					action="items">
-					<f:param value="createItem" name="pageViewId" />
-				</rich:panelMenuItem>
-				<rich:panelMenuItem label="Alter" action="items" />
-				<rich:panelMenuItem label="Delete" action="items" />
-			</rich:panelMenuGroup>
-			<rich:panelMenuItem label="Others" />
-		</rich:panelMenuGroup>
-		<rich:panelMenuGroup label="Reports">
-			<rich:panelMenuItem itemMode="ajax" label="Balance Sheet">
-				<f:param value="Reports" name="pageViewId" />
-			</rich:panelMenuItem>
-			<rich:panelMenuItem label="Profit  Loss" />
-			<rich:panelMenuItem label="Stock Summary" />
-		</rich:panelMenuGroup>
-
-
-
-		<rich:panelMenuGroup label="Units">
-			<rich:panelMenuItem name="units" itemMode="ajax" label="Create"
-				actionListener="#{pageViewIdGenerator.getSideBarAction}"
-				action="units">
-				<f:param value="units" name="pageViewId" />
-			</rich:panelMenuItem>
-			<rich:panelMenuItem name="unitsdisplay" label="Display"
-				itemMode="ajax"
-				actionListener="#{pageViewIdGenerator.getSideBarAction}"
-				action="unitsdisplay">
-				<f:param value="unitsdisplay" name="pageViewId" />
-			</rich:panelMenuItem>
-			<rich:panelMenuItem label="Alter" />
-		</rich:panelMenuGroup>
-
-		<rich:panelMenuGroup label="Stock Location">
-			<rich:panelMenuItem name="location" itemMode="ajax" label="Create"
-				actionListener="#{pageViewIdGenerator.getSideBarAction}"
-				action="location">
-				<f:param value="location" name="pageViewId" />
-			</rich:panelMenuItem>
-			<rich:panelMenuItem name="locationdisplay" label="Display"
-				itemMode="ajax"
-				actionListener="#{pageViewIdGenerator.getSideBarAction}"
-				action="locationdisplay">
-				<f:param value="locationdisplay" name="pageViewId" />
-			</rich:panelMenuItem>
-			<rich:panelMenuItem label="Alter" />
-		</rich:panelMenuGroup>
-
-
-		<rich:panelMenuGroup label="Log">
-			<rich:panelMenuItem name="showAllLogs" itemMode="ajax"
-				label="All Logs"
-				actionListener="#{pageViewIdGenerator.getSideBarAction}"
-				action="main">
-				<f:param value="showAllLogs" name="pageViewId" />
-			</rich:panelMenuItem>
-			<rich:panelMenuItem label="Other log " />
-			<rich:panelMenuItem label="Other log" />
-		</rich:panelMenuGroup>
-
-		<rich:panelMenuGroup label="Help">
-			<rich:panelMenuItem name="help" itemMode="ajax" label="Create"
-				actionListener="#{pageViewIdGenerator.getSideBarAction}"
-				action="stockgroups">
-				<f:param value="help" name="pageViewId" />
-			</rich:panelMenuItem>
-			<rich:panelMenuItem label="Other log " />
-			<rich:panelMenuItem label="Other log" />
-		</rich:panelMenuGroup>
-	</rich:panelMenu>
-
-
-
-
+	
+	
+    <rich:panelMenu 
+                topGroupExpandedRightIcon="chevronUp"
+                topGroupCollapsedRightIcon="chevronDown"
+                groupExpandedLeftIcon="disc"
+                groupCollapsedLeftIcon="disc" style="width:170px" activeItem="#{pageViewIdGenerator.includedPage}">
+   <rich:panelMenuGroup label="Accounting">
+      <rich:panelMenuItem label="Sales" name="sales" itemMode="ajax"  actionListener="#{pageViewIdGenerator.getSideBarAction}" action="sales">
+         <f:param value="sales" name="pageViewId"/> 
+         </rich:panelMenuItem>
+      <rich:panelMenuItem label="Another "/>
+      <rich:panelMenuItem label="Another"/>
+   </rich:panelMenuGroup>
+   <rich:panelMenuGroup label="Inventory">
+   <rich:panelMenuGroup label="Stock Groups">
+         <rich:panelMenuItem name="CreateStockGroup" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="stockgroups" >
+         <f:param value="CreateStockGroup" name="pageViewId"/> 
+         </rich:panelMenuItem>
+         <rich:panelMenuItem label="Alter"/>
+         <rich:panelMenuItem label="Delete"/>
+      </rich:panelMenuGroup>
+      
+      <rich:panelMenuGroup label="Items">
+         <rich:panelMenuItem name="createItem" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="items"  >
+         <f:param value="createItem" name="pageViewId"/> 
+         </rich:panelMenuItem>
+      <rich:panelMenuItem name="displayItem" itemMode="ajax" label="Display" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="itemsDisplay"  >
+         <f:param value="displayItem" name="pageViewId"/> 
+         </rich:panelMenuItem>
+         <rich:panelMenuItem label="Alter" action="items" />
+      </rich:panelMenuGroup>
+      <rich:panelMenuItem label="Others"/>
+   </rich:panelMenuGroup>
+ <rich:panelMenuGroup label="Reports">
+      <rich:panelMenuItem  itemMode="ajax" label="Balance Sheet">
+         <f:param value="Reports" name="pageViewId"/> 
+         </rich:panelMenuItem>
+      <rich:panelMenuItem label="Profit  Loss"/>
+      <rich:panelMenuItem label="Stock Summary"/>
+   </rich:panelMenuGroup>
+   
+   
+   
+   <rich:panelMenuGroup label="Units">
+      <rich:panelMenuItem  name="units" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="units" >
+         <f:param value="units" name="pageViewId"/> 
+         </rich:panelMenuItem>
+      <rich:panelMenuItem name="unitsdisplay" label="Display" itemMode="ajax"  actionListener="#{pageViewIdGenerator.getSideBarAction}" action="unitsdisplay">
+      <f:param value="unitsdisplay" name="pageViewId"/> 
+      </rich:panelMenuItem>
+      <rich:panelMenuItem label="Alter"/>
+   </rich:panelMenuGroup>
+   
+   <rich:panelMenuGroup label="Stock Location">
+      <rich:panelMenuItem  name="location" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="location" >
+         <f:param value="location" name="pageViewId"/> 
+         </rich:panelMenuItem>
+      <rich:panelMenuItem name="locationdisplay" label="Display" itemMode="ajax"  actionListener="#{pageViewIdGenerator.getSideBarAction}" action="locationdisplay">
+      <f:param value="locationdisplay" name="pageViewId"/> 
+      </rich:panelMenuItem>
+      <rich:panelMenuItem label="Alter"/>
+   </rich:panelMenuGroup>
+   
+   
+    <rich:panelMenuGroup label="Log">
+      <rich:panelMenuItem  name="showAllLogs" itemMode="ajax" label="All Logs" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="main" >
+         <f:param value="showAllLogs" name="pageViewId"/> 
+         </rich:panelMenuItem>
+      <rich:panelMenuItem label="Other log "/>
+      <rich:panelMenuItem label="Other log"/>
+   </rich:panelMenuGroup>
+   
+   <rich:panelMenuGroup label="Help">
+      <rich:panelMenuItem name="help" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="stockgroups" >
+         <f:param value="help" name="pageViewId"/> 
+         </rich:panelMenuItem>
+      <rich:panelMenuItem label="Other log "/>
+      <rich:panelMenuItem label="Other log"/>
+   </rich:panelMenuGroup>
+   
+    <rich:panelMenuGroup label="Global Configuration">
+      <rich:panelMenuItem name="global" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="stockgroups" >
+         <f:param value="global" name="pageViewId"/> 
+         </rich:panelMenuItem>
+      <rich:panelMenuItem label="Other log "/>
+      <rich:panelMenuItem label="Other log"/>
+   </rich:panelMenuGroup>
+   
+   
+</rich:panelMenu>
+  
+  
+ 
 </ui:composition>

@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:c="http://java.sun.com/jstl/core"
+	xmlns:a4j="http://richfaces.org/a4j" template="layouts/layout.xhtml">
+	<ui:define name="content">
+
+		<a4j:outputPanel id="SalePanel">
+			<rich:panel id="MyPanel">
+				
+
+
+				<rich:collapsiblePanel header="Configuration"  switchType="client"
+					expanded="false">
+					<h:form>
+						<h:panelGrid columns="2" styleClass="configurationTable" columnClasses="configuration">
+
+							<h:outputText value="Number of Digit to use for roundUp : " />
+							<h:inputText size="8" id="digit"
+								value="#{wsSalesController.model.salesPreferenceDTO.roundUpDigit}"
+								style="font-size:11px" />
+
+							<h:outputText value="Vat(%) : " />
+							<h:inputText size="8" id="vat"
+								value="#{wsSalesController.model.salesPreferenceDTO.vat}"
+								style="font-size:11px" />
+
+							<h:outputText value="Tax(%) : " />
+							<h:inputText size="8" id="tax"
+								value="#{wsSalesController.model.salesPreferenceDTO.tax}"
+								style="font-size:11px" />
+
+							<h:outputText value="Discount(%): " />
+							<h:inputText size="8" id="discount"
+								value="#{wsSalesController.model.salesPreferenceDTO.discount}"
+								style="font-size:11px" />
+
+							<h:outputText value="Calcuate Tax, VAT before discount" />
+							<h:selectBooleanCheckbox
+								value="#{wsSalesController.model.salesPreferenceDTO.calculateTaxBeforeDiscount}" />
+								
+									<h:outputText value="Individual discount column required " />
+							<h:selectBooleanCheckbox />
+							
+							<h:outputText value=" Individual TAX column required " />
+							<h:selectBooleanCheckbox />
+							
+							<h:outputText value="Individual VAT column required " />
+							<h:selectBooleanCheckbox />
+								
+								
+							<h:outputText value="This ways configuration will done " />
+
+
+						</h:panelGrid>
+
+
+						<h:panelGrid columns="3">
+							<a4j:commandButton type="submit"
+								actionListener="#{wsSalesController.updateUserPreference}"
+								render="salesItems" value="Apply" />
+
+
+						</h:panelGrid>
+					</h:form>
+				</rich:collapsiblePanel>
+
+				<h:panelGrid styleClass="itemTableHeader" columns="2">
+
+
+					<h:outputText value="Sales" />
+					<h:outputText value="#{wsSalesController.today}" />
+
+
+
+
+
+
+					<h:outputText value="Ref : " />
+					<h:inputText id="Ref" size="25" style="font-size:15px" />
+
+
+
+
+
+					<h:outputText value="Party's Name :  " />
+					<h:inputText size="35" id="Party" style="font-size:15px" />
+
+
+
+
+
+
+				</h:panelGrid>
+
+
+				<h:panelGrid styleClass="itemTable2">
+
+
+
+					<rich:dataTable id="salesItems"
+						value="#{wsSalesController.model.itemDTOs}" rowKeyVar="rowKey"
+						var="items" rows="10" style="width: 100%;margin-top: 5px">
+
+
+						<f:facet name="header">
+							<rich:columnGroup>
+								<rich:column rowspan="2">
+								</rich:column>
+
+								<rich:column rowspan="2"> Name of items
+                </rich:column>
+
+								<rich:column colspan="3">
+									<h:outputText value="Details" />
+								</rich:column>
+								<rich:column rowspan="2">
+									<h:outputText value="SubTotals" />
+								</rich:column>
+								<rich:column breakRowBefore="true">
+									<h:outputText value="Quantity" />
+								</rich:column>
+								<rich:column>
+									<h:outputText value="Rate" />
+								</rich:column>
+								<rich:column>
+									<h:outputText value="Per" />
+								</rich:column>
+							</rich:columnGroup>
+						</f:facet>
+
+
+
+						<rich:columnGroup>
+
+							<rich:column>
+
+
+								<h:outputText value="#{rowKey+1}" />
+
+							</rich:column>
+
+							<rich:column>
+
+
+
+								<rich:select styleClass="itemList" enableManualInput="true"
+									listHeight="500px" listWidth="350px" id="Item" label="item"
+									value="#{items.itemID}" defaultLabel="--select--"
+									required="true" requiredMessage="Please select Item">
+									<a4j:ajax event="selectitem"
+										listener="#{wsSalesController.selectedItem(rowKey)}"
+										render="salesItems" />
+									<f:selectItems value="#{items.wsItemDTOs}" var="item"
+										itemLabel="#{item.itemName} [#{item.itemCode}]"
+										itemValue="#{item.itemID}" />
+								</rich:select>
+
+								<rich:message for="Item" />
+
+							</rich:column>
+
+
+
+							<rich:column>
+
+
+								<h:inputText styleClass="testVivek0" id="Quantity"
+									value="#{items.quantity}"
+									requiredMessage="Please enter quantity " required="true"
+									style="font-size:12px">
+
+									<a4j:ajax event="change"
+										listener="#{wsSalesController.quantityChanged(rowKey)}"
+										render="salesItems" />
+								</h:inputText>
+
+								<rich:message for="Quantity" />
+
+							</rich:column>
+
+							<rich:column>
+
+
+								<h:inputText styleClass="testVivek1" id="Rate"
+									value="#{items.markedPrice}"
+									requiredMessage="Please enter rate " required="true"
+									style="font-size:12px">
+
+									<a4j:ajax event="change"
+										listener="#{wsSalesController.rateChanged(rowKey)}"
+										render="salesItems" />
+								</h:inputText>
+
+
+								<rich:message for="Rate" />
+							</rich:column>
+
+							<rich:column>
+
+
+								<rich:select styleClass="itemPer" enableManualInput="true"
+									id="Per" label="Unit" listHeight="500px" listWidth="160px"
+									value="#{items.unitDTO.unitID}" defaultLabel="--select--"
+									required="true" requiredMessage="Please select unit">
+									<a4j:ajax event="selectitem"
+										listener="#{wsSalesController.perChanged(rowKey)}"
+										render="salesItems" />
+									<f:selectItems value="#{items.wsUnitDTOs}" var="unit"
+										itemLabel="#{unit.unitName}" itemValue="#{unit.unitID}" />
+								</rich:select>
+								<rich:message for="Per" />
+							</rich:column>
+
+
+							<rich:column>
+
+
+								<h:inputText styleClass="testVivek2" id="Amount"
+									value="#{items.totalPrice}" style="font-size:12px" />
+
+							</rich:column>
+
+
+						</rich:columnGroup>
+
+
+
+
+
+						<f:facet name="footer">
+							<h:panelGrid styleClass="hello" columns="2"
+								columnClasses="saleCol1 , saleCol2">
+								<h:outputText value="Sub Total" />
+								<h:outputText value="#{wsSalesController.model.totalSalePrice}" />
+
+
+
+								<h:outputText
+									value="Tax (#{wsSalesController.model.salesPreferenceDTO.tax}%)" />
+								<h:outputText value="#{wsSalesController.model.tax}" />
+
+								<h:outputText
+									value="Discount(#{wsSalesController.model.salesPreferenceDTO.discount}%)" />
+								<h:outputText value="#{wsSalesController.model.discount}" />
+
+
+								<h:outputText style="font-size:14px" value="Grand Total" />
+								<h:outputText style="font-size:14px"
+									value="#{wsSalesController.model.grandTotalSalePrice}" />
+
+							</h:panelGrid>
+						</f:facet>
+
+
+
+
+
+					</rich:dataTable>
+
+
+                    <h:panelGrid columns="3">
+					<a4j:commandLink value="Add"
+						actionListener="#{wsSalesController.addRow}" render="salesItems">
+					</a4j:commandLink>
+					<h:outputText value="&#160;" />
+					<a4j:commandLink value="Delete "
+						actionListener="#{wsSalesController.deleteRow}"
+						render="salesItems" immediate="true">
+					</a4j:commandLink>
+			</h:panelGrid>
+
+				</h:panelGrid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<h:panelGrid columns="3">
+
+
+
+					<a4j:commandButton type="submit"
+						actionListener="#{wsSalesController.saleItems}"
+						value="Confirm Sale" render="SalePanel" />
+					<h:outputText value="&#160;&#160;&#160;" />
+					<a4j:commandButton type="button"
+						actionListener="#{wsSalesController.reSet}" value="Reset"
+						render="SalePanel" immediate="true" />
+
+				</h:panelGrid>
+
+			</rich:panel>
+
+
+
+
+
+
+
+
+		</a4j:outputPanel>
+	</ui:define>
+</ui:composition>

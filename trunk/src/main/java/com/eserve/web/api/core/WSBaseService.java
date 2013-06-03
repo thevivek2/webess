@@ -22,7 +22,7 @@ public abstract interface WSBaseService {
 	 *WSDTO
 	 *@author Vivek Adhikari
 	 */
-	public WSDTO getModel(String modelID);
+	public WSDTO getModel(int modelID);
 	
 	/**
 	 *@
@@ -81,5 +81,12 @@ public abstract interface WSBaseService {
 	 */
 	
 	public boolean updateModels(List<WSDTO> modelsList);
+
+	/**
+	 * given the WSDTO model, it will return the same model 
+	 * @param model
+	 * @return
+	 */
+	public WSDTO getModel(WSDTO model);
 
 }

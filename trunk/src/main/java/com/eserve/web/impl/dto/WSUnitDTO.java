@@ -7,7 +7,6 @@ package com.eserve.web.impl.dto;
 
 import java.util.List;
 
-import javax.inject.Named;
 
 import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.impl.common.WSCommonDTO;
@@ -21,14 +20,17 @@ public class WSUnitDTO  extends WSCommonDTO implements WSDTO {
 
 	private static final long serialVersionUID = -1127404152488419620L;
 	
-	private int unitID;
+	
+	
+	private int unitID=0;
 	private String unitName;
 	private String unitDesc;
-	
 	private int secondaryUnitID;
     private float twoUnitsRelator;
     
-    private int unitDefineType;
+   
+   
+    private int unitDefineType=0;
     private String unitDefineTitle;
 	
 	private List<WSUnitDTO> wsUnitDTO;
@@ -132,6 +134,8 @@ public class WSUnitDTO  extends WSCommonDTO implements WSDTO {
 	public void setSecondaryUnitID(int secondaryUnitID) {
 		this.secondaryUnitID = secondaryUnitID;
 	}
+	
+	
 	
 	
 	

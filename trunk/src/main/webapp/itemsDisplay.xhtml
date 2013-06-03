@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:rich="http://richfaces.org/rich"
+    xmlns:c="http://java.sun.com/jstl/core"
+    xmlns:a4j="http://richfaces.org/a4j" template="layouts/layout.xhtml">
+   
+    
+   <ui:define name="content">
+<rich:panel>
+        <f:facet name="header">
+            <h:outputText value="All Items"></h:outputText>
+        </f:facet>
+        <h:form>
+            <rich:dataGrid value="#{wsItemController.models}" var="items" columns="4" elements="12" width="600px" border="0">
+                <rich:panel bodyClass="pbody">
+                    <f:facet name="header">
+                        <h:outputText value="#{items.itemName}"></h:outputText>
+                    </f:facet>
+                    <h:panelGrid columns="2">
+                        <h:outputText value="Price:" styleClass="label"></h:outputText>
+                        <h:outputText value="100" />
+                        <h:outputText value="Code:" styleClass="label"></h:outputText>
+                        <h:outputText value="#{items.itemCode}" />
+                        <h:outputText value="Stock:" styleClass="label"></h:outputText>
+                        <h:outputText value="" />
+                        <h:outputText value="Store:" styleClass="label"></h:outputText>
+                        <h:outputText value="" />
+                    </h:panelGrid>
+                </rich:panel>
+                <f:facet name="footer">
+                    <rich:dataScroller />
+                </f:facet>
+            </rich:dataGrid>
+        </h:form>
+    </rich:panel>
+</ui:define>
+
+
+</ui:composition>

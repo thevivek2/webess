@@ -17,6 +17,7 @@ import org.springframework.jdbc.core.RowMapper;
 import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.api.dao.WSUnitDAO;
 import com.eserve.web.impl.common.WSCommonDAO;
+import com.eserve.web.impl.dto.WSItemDTO;
 import com.eserve.web.impl.dto.WSUnitDTO;
 
 /**
@@ -101,6 +102,7 @@ public class WSUnitDAOImpl extends WSCommonDAO implements WSUnitDAO {
 					dto.setUnitID(rs.getInt("unitid"));
 					dto.setUnitName(rs.getString("name"));
 					dto.setUnitDesc(rs.getString("des"));
+					
 					return dto;
 				}
 			};
@@ -109,11 +111,45 @@ public class WSUnitDAOImpl extends WSCommonDAO implements WSUnitDAO {
 				listofAllUnits = getJdbcTemplate().query(
 						"Select unitid, name, des from Eserve_WAM_units ",
 						rowMapper);
-			} else {
+				System.out.println("getting simple units");
+			} else if(((WSUnitDTO) model).getUnitDefineType() == 1) {
 				listofAllUnits = getJdbcTemplate()
 						.query("Select cunitid as unitid, name, des from Eserve_WAM_compoundunits ",
 								rowMapper);
+				System.out.println("getting compound units");
 			}
+			
+			
+		}
+		
+		if(model instanceof WSItemDTO)
+		{
+			System.out.println("following item is selected"+((WSItemDTO) model).getItemID());
+			RowMapper<WSUnitDTO> rowMapper = new RowMapper<WSUnitDTO>() {
+
+				@Override
+				public WSUnitDTO mapRow(ResultSet rs, int arg1)
+						throws SQLException {
+					WSUnitDTO dto = new WSUnitDTO();
+					dto.setUnitID(rs.getInt("unit"));
+					dto.setUnitName(rs.getString("name"));
+					dto.setUnitDesc(rs.getString("des"));
+					
+					return dto;
+				}
+			};
+			String strSQL = ""
+					+ "SELECT t1.unit, "
+					+ "       t2.des, "
+					+ "       t2.name "
+					+ "FROM   eserve_wam_stockin t1 "
+					+ "       INNER JOIN eserve_wam_units t2 "
+					+ "               ON t1.unit = t2.unitid "
+					+ "WHERE  itemid = " +((WSItemDTO) model).getItemID();
+			listofAllUnits = getJdbcTemplate().query(
+					strSQL,
+					rowMapper);
+			
 		}
 		return listofAllUnits;
 	}

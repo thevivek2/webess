@@ -23,7 +23,7 @@ public class WSCommonService implements WSBaseService {
 	 * @see com.eserve.web.api.core.WSBaseService#getModel(java.lang.String)
 	 */
 	@Override
-	public WSDTO getModel(String modelID) {
+	public WSDTO getModel(int modelID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -77,8 +77,16 @@ public class WSCommonService implements WSBaseService {
 	 */
 	@Override
 	public boolean updateModels(List<WSDTO> modelsList) {
-		// TODO Auto-generated method stub
 		return false;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.eserve.web.api.core.WSBaseService#getModel(com.eserve.web.api.core.WSDTO)
+	 */
+	@Override
+	public WSDTO getModel(WSDTO model) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

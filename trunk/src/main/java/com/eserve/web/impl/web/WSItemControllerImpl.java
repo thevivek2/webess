@@ -5,8 +5,10 @@
  */
 package com.eserve.web.impl.web;
 
-
 import java.io.Serializable;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
 
 import javax.faces.event.ActionEvent;
 
@@ -16,92 +18,107 @@ import javax.inject.Named;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-
+import com.eserve.web.api.core.WSDTO;
 import com.eserve.web.api.service.WSItemService;
+import com.eserve.web.api.service.WSUserPreferenceService;
 import com.eserve.web.api.web.WSItemController;
 import com.eserve.web.impl.common.WSCommonController;
+import com.eserve.web.impl.dao.WSUnitDAOImpl;
 import com.eserve.web.impl.dto.WSItemDTO;
+import com.eserve.web.impl.dto.WSSalesDTO;
+import com.eserve.web.impl.dto.WSSalesPreferenceDTO;
 import com.eserve.web.impl.dto.WSUnitDTO;
+import com.eserve.web.impl.service.WSUserPreferenceServiceImpl;
 
 /**
  * @author Vivek Adhikari
- *
+ * 
  */
 @Controller
 @Named("wsItemController")
 @Scope("request")
-public class WSItemControllerImpl extends WSCommonController implements WSItemController ,Serializable {
+public class WSItemControllerImpl extends WSCommonController implements
+		WSItemController, Serializable {
 
-	private static final long serialVersionUID = -8942245932409952875L;
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6988071970780339455L;
+
+	/**
+	 * 
+	 */
+
 	@Inject
-	@Named("wsItemService")  
+	@Named("wsItemService")
 	private WSItemService service;
 	
+	@Inject
+	@Named("wsUserPreferenceService")
+	WSUserPreferenceService preferenceService;
+
 	private WSItemDTO model;
 	private boolean loadModel;
-		private boolean simpleUnit=true;
-	/* (non-Javadoc)
-	 * @see com.eserve.web.api.web.WSItemController#addItem(javax.faces.event.ActionEvent)
+	private int rowCount = 1;
+	private boolean simpleUnit = true;
+
+	@Inject
+	@Named("wsUnitDAO")
+	WSUnitDAOImpl unitDAOImpl;
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.eserve.web.api.web.WSItemController#addItem(javax.faces.event.ActionEvent
+	 * )
 	 */
 	@Override
 	public void addItem(ActionEvent event) {
-		
-		System.out.println("User Want to add item having");
-		System.out.println("Name"+model.getItemName());
-		System.out.println("Alise"+model.getItemAlieas());
-		System.out.println("Available date"+model.getAvailableDate());
-		if(isSimpleUnit())
-		{
-		model.getUnitDTO().setUnitDefineType(0);
-		}
-		else
-		{
-		model.getUnitDTO().setUnitDefineType(1);	
-		}
+		System.out.println("adding item");
 		service.saveModel(model);
-		model= new WSItemDTO();
-		
+		setModel(model);
+
 	}
-	
-	
-	
-	public String showCompound() 
-	{
-		System.out.println("is simple unit "+isSimpleUnit());
+
+	public void reSet(ActionEvent event) {
+		setModel(model);
+	}
+
+	public String showCompound(int rowNumber) {
+		WSUnitDTO unitDTO = new WSUnitDTO();
+		System.out.println(model.getWsItemDTOs().get(rowNumber).getUnitDTO()
+				.getUnitDefineType());
+		unitDTO.setUnitDefineType(model.getWsItemDTOs().get(rowNumber)
+				.getUnitDTO().getUnitDefineType());
+		List listOFUnits = unitDAOImpl.getModels(unitDTO);
+		model.getWsItemDTOs().get(rowNumber).setWsUnitDTOs(listOFUnits);
+
 		return "";
 	}
+
 	/**
 	 * @return the model
 	 */
 	@Override
 	public WSItemDTO getModel() {
-		if(model==null || isLoadModel())
-		{
-			WSItemDTO dto= new WSItemDTO();
-			WSUnitDTO unitDTO= new WSUnitDTO();
-			if(!isSimpleUnit())
-			{
-				unitDTO.setUnitDefineType(1);
-			}
-			else
-			{
-				unitDTO.setUnitDefineType(0);
-			}
-			
+		if (model == null || isLoadModel()) {
+			WSItemDTO dto = new WSItemDTO();
+			WSUnitDTO unitDTO = new WSUnitDTO();
 			dto.setUnitDTO(unitDTO);
 			setModel(dto);
 		}
-		
+
 		return model;
 	}
+
 	/**
-	 * @param model the model to set
+	 * @param model
+	 *            the model to set
 	 */
 	public void setModel(WSItemDTO model) {
-		this.model=(WSItemDTO) service.getModels(model).get(0);
-		
-		
+		this.model = (WSItemDTO) service.getModel(model);
+
 	}
 
 	/**
@@ -110,15 +127,14 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 	public boolean isLoadModel() {
 		return loadModel;
 	}
+
 	/**
-	 * @param loadModel the loadModel to set
+	 * @param loadModel
+	 *            the loadModel to set
 	 */
 	public void setLoadModel(boolean loadModel) {
 		this.loadModel = loadModel;
 	}
-
-
-
 
 	/**
 	 * @return the simpleUnit
@@ -127,16 +143,54 @@ public class WSItemControllerImpl extends WSCommonController implements WSItemCo
 		return simpleUnit;
 	}
 
-
-
-
 	/**
-	 * @param simpleUnit the simpleUnit to set
+	 * @param simpleUnit
+	 *            the simpleUnit to set
 	 */
 	public void setSimpleUnit(boolean simpleUnit) {
 		this.simpleUnit = simpleUnit;
 	}
 
+	public String addRow() {
+		model.getUnitDTO().setUnitDefineType(0);
+		model.getWsItemDTOs().add((WSItemDTO) service.getModels(model).get(0));
+		return "";
+	}
+
+	public String deleteRow() {
+		if (model.getWsItemDTOs() != null && model.getWsItemDTOs().size() >= 2) {
+			model.getWsItemDTOs().remove(model.getWsItemDTOs().size() - 1);
+		}
+		return "";
+	}
+
+	/**
+	 * @return the rowCount
+	 */
+	public int getRowCount() {
+		return rowCount;
+	}
+
+	/**
+	 * @param rowCount
+	 *            the rowCount to set
+	 */
+	public void setRowCount(int rowCount) {
+		this.rowCount = rowCount;
+	}
+
+	public String updateUserPreference()
+	{
+		System.out.println("User preferences has been saved");
+		preferenceService.saveModel(model.getItemPreferenceDTO());
+		return "";
+		
+	}
 	
 	
+	
+	@PostConstruct
+	public void init() {
+
+	}
 }
