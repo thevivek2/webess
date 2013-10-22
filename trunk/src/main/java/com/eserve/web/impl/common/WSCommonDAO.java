@@ -12,6 +12,7 @@ import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.sql.DataSource;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -26,9 +27,11 @@ import com.eserve.web.api.core.WSDTO;
  */
 @Repository
 @Named("wsCommonDAO")
-public class WSCommonDAO implements WSDAO {
+public class WSCommonDAO  implements WSDAO {
 
 	private JdbcTemplate jdbcTemplate;
+	
+	
 
 	@Autowired
 	public void setDataSource(DataSource dataSource) {

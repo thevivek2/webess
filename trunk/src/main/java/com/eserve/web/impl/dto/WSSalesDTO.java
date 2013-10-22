@@ -24,6 +24,8 @@ public class WSSalesDTO extends WSCommonDTO implements WSDTO {
 	
 	private List<WSItemDTO> itemDTOs;
 	private WSItemDTO itemDTO;
+	private WSCurrentStockDTO currentStockDTO;
+	private List<WSCurrentStockDTO> currentStockDTOs;
 	
 	private String party;
 	
@@ -44,6 +46,11 @@ public class WSSalesDTO extends WSCommonDTO implements WSDTO {
 	}
 	
 	public ChangedAttribute changedThing;
+	
+	private boolean result=false;
+	private int caseCheck;
+	
+	private int caseUpdate;
 	
 	
 	
@@ -202,6 +209,76 @@ public class WSSalesDTO extends WSCommonDTO implements WSDTO {
 	 */
 	public void setChangedRow(int changedRow) {
 		this.changedRow = changedRow;
+	}
+
+	/**
+	 * @return the result
+	 */
+	public boolean isResult() {
+		return result;
+	}
+
+	/**
+	 * @param result the result to set
+	 */
+	public void setResult(boolean result) {
+		this.result = result;
+	}
+
+	/**
+	 * @return the caseCheck
+	 */
+	public int getCaseCheck() {
+		return caseCheck;
+	}
+
+	/**
+	 * @param caseCheck the caseCheck to set
+	 */
+	public void setCaseCheck(int caseCheck) {
+		this.caseCheck = caseCheck;
+	}
+
+	/**
+	 * @return the caseUpdate
+	 */
+	public int getCaseUpdate() {
+		return caseUpdate;
+	}
+
+	/**
+	 * @param caseUpdate the caseUpdate to set
+	 */
+	public void setCaseUpdate(int caseUpdate) {
+		this.caseUpdate = caseUpdate;
+	}
+
+	/**
+	 * @return the currentStockDTO
+	 */
+	public WSCurrentStockDTO getCurrentStockDTO() {
+		return currentStockDTO;
+	}
+
+	/**
+	 * @param currentStockDTO the currentStockDTO to set
+	 */
+	public void setCurrentStockDTO(WSCurrentStockDTO currentStockDTO) {
+		this.currentStockDTO = currentStockDTO;
+	}
+
+	/**
+	 * @return the currentStockDTOs
+	 */
+	public List<WSCurrentStockDTO> getCurrentStockDTOs() {
+		return currentStockDTOs;
+	}
+
+	/**
+	 * @param currentStockDTOs the currentStockDTOs to set
+	 */
+	public void setCurrentStockDTOs(List<WSCurrentStockDTO> currentStockDTOs) {
+		this.currentStockDTOs = currentStockDTOs;
 	}
 
 	

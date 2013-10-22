@@ -5,7 +5,10 @@
  */
 package com.eserve.web.impl.dto;
 
+import java.math.BigDecimal;
 import java.util.List;
+
+import javax.inject.Named;
 
 
 import com.eserve.web.api.core.WSDTO;
@@ -16,6 +19,7 @@ import com.eserve.web.impl.common.WSCommonDTO;
  *
  */
 
+@Named("wsUnitDTO")
 public class WSUnitDTO  extends WSCommonDTO implements WSDTO {
 
 	private static final long serialVersionUID = -1127404152488419620L;
@@ -23,14 +27,45 @@ public class WSUnitDTO  extends WSCommonDTO implements WSDTO {
 	
 	
 	private int unitID=0;
+	private int markedPriceUnitID;
 	private String unitName;
 	private String unitDesc;
 	private int secondaryUnitID;
-    private float twoUnitsRelator;
+    private BigDecimal twoUnitsRelator;
+    private int parentID=0;
+    
+    private String relationByID;
+    private String relationByALL;
+    
+    private String queryFor;
     
    
    
-    private int unitDefineType=0;
+    /**
+	 * @return the queryFor
+	 */
+	public String getQueryFor() {
+		return queryFor;
+	}
+	/**
+	 * @param queryFor the queryFor to set
+	 */
+	public void setQueryFor(String queryFor) {
+		this.queryFor = queryFor;
+	}
+	/**
+	 * @return the parentID
+	 */
+	public int getParentID() {
+		return parentID;
+	}
+	/**
+	 * @param parentID the parentID to set
+	 */
+	public void setParentID(int parentID) {
+		this.parentID = parentID;
+	}
+	private int unitDefineType=0;
     private String unitDefineTitle;
 	
 	private List<WSUnitDTO> wsUnitDTO;
@@ -61,19 +96,19 @@ public class WSUnitDTO  extends WSCommonDTO implements WSDTO {
 		this.unitDesc = unitDesc;
 	}
 	
+	
 	/**
 	 * @return the twoUnitsRelator
 	 */
-	public float getTwoUnitsRelator() {
+	public BigDecimal getTwoUnitsRelator() {
 		return twoUnitsRelator;
 	}
 	/**
 	 * @param twoUnitsRelator the twoUnitsRelator to set
 	 */
-	public void setTwoUnitsRelator(float twoUnitsRelator) {
+	public void setTwoUnitsRelator(BigDecimal twoUnitsRelator) {
 		this.twoUnitsRelator = twoUnitsRelator;
 	}
-	
 	/**
 	 * @return the unitName
 	 */
@@ -134,6 +169,43 @@ public class WSUnitDTO  extends WSCommonDTO implements WSDTO {
 	public void setSecondaryUnitID(int secondaryUnitID) {
 		this.secondaryUnitID = secondaryUnitID;
 	}
+	/**
+	 * @return the relationByID
+	 */
+	public String getRelationByID() {
+		return relationByID;
+	}
+	/**
+	 * @param relationByID the relationByID to set
+	 */
+	public void setRelationByID(String relationByID) {
+		this.relationByID = relationByID;
+	}
+	/**
+	 * @return the relationByALL
+	 */
+	public String getRelationByALL() {
+		return relationByALL;
+	}
+	/**
+	 * @param relationByALL the relationByALL to set
+	 */
+	public void setRelationByALL(String relationByALL) {
+		this.relationByALL = relationByALL;
+	}
+	/**
+	 * @return the markedPriceUnitID
+	 */
+	public int getMarkedPriceUnitID() {
+		return markedPriceUnitID;
+	}
+	/**
+	 * @param markedPriceUnitID the markedPriceUnitID to set
+	 */
+	public void setMarkedPriceUnitID(int markedPriceUnitID) {
+		this.markedPriceUnitID = markedPriceUnitID;
+	}
+	
 	
 	
 	

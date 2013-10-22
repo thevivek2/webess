@@ -16,7 +16,7 @@ import com.eserve.web.impl.common.WSCommonDTO;
  * @author Vivek Adhikari
  * 
  */
-public class WSItemDTO extends WSCommonDTO implements WSDTO {
+public class WSItemDTO extends WSCommonDTO {
 
 	private static final long serialVersionUID = -8942317932409952875L;
 
@@ -51,28 +51,35 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 	
 	private boolean listAllItems;
 
-	private int itemID;
+	private int itemID = 0;
 	private String itemName;
 	private String itemAlias;
 	private String des;
     private String itemCode;
 	private Date createdOn;
 	private Date availableDate;
-	private boolean hasImpactOnStock;
+	private boolean hasImpactOnStock=true;
 	private boolean vatApplicable;
 	private String createdBy;
-    private long quantity=1;
+    private float quantity=1;
     private int costingType;
     
     
     private float unitPrice;
     private BigDecimal markedPrice;
+   
     private BigDecimal totalPrice;
     
     private float dutyFee;
     
+    private BigDecimal vat;
+    private BigDecimal tax;
+    private BigDecimal discount;
+    
     
     private int vendor;
+    
+    private String searchCriteria ;
 
 
 	
@@ -164,25 +171,26 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 		this.createdBy = createdBy;
 	}
 
+	
+
+	
+
+	
+	
 	/**
 	 * @return the quantity
 	 */
-	public long getQuantity() {
+	public float getQuantity() {
 		return quantity;
 	}
 
 	/**
-	 * @param quantity
-	 *            the quantity to set
+	 * @param quantity the quantity to set
 	 */
-	public void setQuantity(long quantity) {
+	public void setQuantity(float quantity) {
 		this.quantity = quantity;
 	}
 
-	
-
-	
-	
 	/**
 	 * @return the wsStockGroupDTOs
 	 */
@@ -466,6 +474,64 @@ public class WSItemDTO extends WSCommonDTO implements WSDTO {
 	public void setItemPreferenceDTO(WSItemPreferenceDTO itemPreferenceDTO) {
 		this.itemPreferenceDTO = itemPreferenceDTO;
 	}
+
+	/**
+	 * @return the vat
+	 */
+	public BigDecimal getVat() {
+		return vat;
+	}
+
+	/**
+	 * @param vat the vat to set
+	 */
+	public void setVat(BigDecimal vat) {
+		this.vat = vat;
+	}
+
+	/**
+	 * @return the tax
+	 */
+	public BigDecimal getTax() {
+		return tax;
+	}
+
+	/**
+	 * @param tax the tax to set
+	 */
+	public void setTax(BigDecimal tax) {
+		this.tax = tax;
+	}
+
+	/**
+	 * @return the discount
+	 */
+	public BigDecimal getDiscount() {
+		return discount;
+	}
+
+	/**
+	 * @param discount the discount to set
+	 */
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+	/**
+	 * @return the searchCriteria
+	 */
+	public String getSearchCriteria() {
+		return searchCriteria;
+	}
+
+	/**
+	 * @param searchCriteria the searchCriteria to set
+	 */
+	public void setSearchCriteria(String searchCriteria) {
+		this.searchCriteria = searchCriteria;
+	}
+
+	
 	
 	
 	

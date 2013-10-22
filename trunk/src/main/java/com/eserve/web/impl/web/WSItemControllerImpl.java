@@ -187,6 +187,13 @@ public class WSItemControllerImpl extends WSCommonController implements
 		
 	}
 	
+	public String selectedItem()
+	{
+		System.out.println(model.getItemID());
+		setModel(model);
+		return  "";
+	}
+	
 	
 	
 	@PostConstruct

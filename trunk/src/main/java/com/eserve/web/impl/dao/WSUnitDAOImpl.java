@@ -37,13 +37,13 @@ public class WSUnitDAOImpl extends WSCommonDAO implements WSUnitDAO {
 		List<WSUnitDTO> unitDTOList = new ArrayList<WSUnitDTO>();
 		WSUnitDTO dto = new WSUnitDTO();
 		dto.setUnitDefineType(0);
-		dto.setUnitDefineTitle("Simple");
+		dto.setUnitDefineTitle("Units at Top of the Level");
 		unitDTOList.add(dto);
 		if (getJdbcTemplate().queryForInt(
-				"select count(unitid) from Eserve_WAM_units") >= 2) {
+				"select count(unitid) from Eserve_WAM_units") >= 1) {
 			WSUnitDTO dto1 = new WSUnitDTO();
 			dto1.setUnitDefineType(1);
-			dto1.setUnitDefineTitle("Compound");
+			dto1.setUnitDefineTitle("Relational Unit ");
 			unitDTOList.add(dto1);
 		}
 		WSUnitDTO dto2 = new WSUnitDTO();
@@ -53,21 +53,13 @@ public class WSUnitDAOImpl extends WSCommonDAO implements WSUnitDAO {
 
 	@Override
 	public boolean saveModel(WSUnitDTO model) {
-		if (model.getUnitDefineType() == 0) {
-			getJdbcTemplate().update(
-					"INSERT INTO Eserve_WAM_units (Name, des) VALUES(?,?)",
-					new Object[] { model.getUnitName(), model.getUnitDesc() });
-		} else if (model.getUnitDefineType() == 1) {
-			model.setUnitName(getUnitName(model.getUnitID()) + " of "
-					+ model.getTwoUnitsRelator() +" "
-					+ getUnitName(model.getSecondaryUnitID()));
-			getJdbcTemplate()
-					.update("INSERT INTO Eserve_WAM_compoundunits (primaryunit, relator,secondaryunit, name,des) VALUES(?,?,?,?,?)",
-							new Object[] { model.getUnitID(),
-									model.getTwoUnitsRelator(),
-									model.getSecondaryUnitID(),
-									model.getUnitName(), model.getUnitDesc() });
-		}
+		getJdbcTemplate()
+					.update("INSERT INTO Eserve_WAM_units (parentid, relator,name, des) VALUES(?,?,?,?)",
+							new Object[] { model.getUnitDefineType()==0 ? 0:model.getParentID(),
+									model.getUnitDefineType()==0 ? 1: model.getTwoUnitsRelator(),
+									model.getUnitName(),
+									model.getUnitDesc() });
+		
 		return true;
 	}
 
@@ -93,6 +85,42 @@ public class WSUnitDAOImpl extends WSCommonDAO implements WSUnitDAO {
 	public List<WSDTO> getModels(WSDTO model) {
 		List listofAllUnits = new ArrayList();
 		if (model instanceof WSUnitDTO) {
+			
+			
+			
+			if (((WSUnitDTO) model).getQueryFor() !=null && ((WSUnitDTO) model).getQueryFor().equalsIgnoreCase("unitsRelation"))
+			{
+				
+				
+				RowMapper<WSUnitDTO> rowMapper = new RowMapper<WSUnitDTO>() {
+
+					@Override
+					public WSUnitDTO mapRow(ResultSet rs, int arg1)
+							throws SQLException {
+						WSUnitDTO dto = new WSUnitDTO();
+						dto.setUnitID(rs.getInt("unitid"));
+						dto.setParentID(rs.getInt("parentid"));
+						dto.setRelationByID(rs.getString("relation"));
+						dto.setRelationByALL(rs.getString("allnames"));
+						return dto;
+					}
+				};
+
+				String strSQL = ""
+						+ "SELECT unitid, "
+						+ "       Getparentunitidbyid(unitid) AS parentid, "
+						+ "       Gettwounitrelator(unitid)   AS relator, "
+						+ "       Getrelation(unitid)         AS relation, "
+						+ "       Getancestryunit(unitid)     AS allnames "
+						+ "FROM   eserve_wam_units";
+				listofAllUnits = getJdbcTemplate().query(
+						strSQL,
+							rowMapper);
+			
+		}
+		else 
+		{
+			System.out.println("returning with else condition");
 			RowMapper<WSUnitDTO> rowMapper = new RowMapper<WSUnitDTO>() {
 
 				@Override
@@ -107,19 +135,12 @@ public class WSUnitDAOImpl extends WSCommonDAO implements WSUnitDAO {
 				}
 			};
 
-			if (((WSUnitDTO) model).getUnitDefineType() == 0) {
-				listofAllUnits = getJdbcTemplate().query(
+			
+			listofAllUnits = getJdbcTemplate().query(
 						"Select unitid, name, des from Eserve_WAM_units ",
 						rowMapper);
-				System.out.println("getting simple units");
-			} else if(((WSUnitDTO) model).getUnitDefineType() == 1) {
-				listofAllUnits = getJdbcTemplate()
-						.query("Select cunitid as unitid, name, des from Eserve_WAM_compoundunits ",
-								rowMapper);
-				System.out.println("getting compound units");
-			}
-			
-			
+				
+				}
 		}
 		
 		if(model instanceof WSItemDTO)

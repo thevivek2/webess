@@ -507,6 +507,16 @@ img {
 	font-size: 12px;
 }
 
+.stockInTableHeader {
+	
+	background-color: #F9F9F9;
+	width: 100%;
+	color: #333;
+	height:50px;
+	float:left;
+	font-size: 12px;
+}
+
 .itemTableFooter {
 	
 	background-color: #F9F9F9;
