@@ -43,8 +43,7 @@ public class WSStockGroupControllerImpl extends WSCommonController implements WS
 		System.out.println("adding model>>>");
 		System.out.println(model.getName());
 		service.saveModel(model);
-		setLoadModel(true);
-		getModel();
+		setModel(model);
 		
 	}
 	

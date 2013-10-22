@@ -8,6 +8,7 @@ package com.eserve.web.impl.service;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -107,13 +108,11 @@ public class WSSalesServiceImpl extends WSCommonService implements
 
 		else if (salesDTO.getChangedThing() != null
 				&& salesDTO.getChangedThing().equals(ChangedAttribute.Per)) {
-			
-			
+
 			WSItemDTO test = salesDTO.getItemDTOs().get(
 					salesDTO.getChangedRow());
-		
-			WSItemDTO hello = (WSItemDTO) itemService.getModel(salesDTO);
 
+			WSItemDTO hello = (WSItemDTO) itemService.getModel(salesDTO);
 			test.setMarkedPrice(hello.getMarkedPrice());
 			if (test.getMarkedPrice() != null) {
 				test.setTotalPrice(cService.getMultiply(test.getMarkedPrice(),
@@ -150,10 +149,62 @@ public class WSSalesServiceImpl extends WSCommonService implements
 		return salesDTO;
 
 	}
+	
+	/**
+	 * This method is responsible to save the sale
+	 * if tax,vat,discount for individul are not calulcated
+	 * this will be calculated from here 
+	 * 
+	 */
 
 	@Override
 	public boolean saveModel(WSDTO model) {
-		return dao.saveModel(model);
+		WSSalesDTO salesDTO = (WSSalesDTO) model;
+		Iterator itr= salesDTO.getItemDTOs().iterator();
+		int i=0;
+		while(itr.hasNext())
+		{
+			
+			WSItemDTO  itemDTO = (WSItemDTO) itr.next();
+			itemDTO.setDiscount(cService.getDiscount(itemDTO.getTotalPrice()));
+			itemDTO.setTax(cService.getTax(itemDTO.getTotalPrice()));
+			i++;
+		}
+		return dao.saveModel(salesDTO);
+	}
+	
+	/**
+	 * This will update the Current Stock
+	 * Current stock will be updated as the Costing type
+	 * @param model is the model which contains the property of the item that is going for sale
+	 * @return true if the operation is sucessfull
+	 * 
+	 * how it works
+	 * it get the item id and unit id and quantity that user want to know
+	 * if item having same unit, quantity and item is found in the current stock, it will delete the that row 
+	 * from current stock table
+	 * 
+	 * if not, it will check all the rows of that item in the current stock table , if same itemid , unit id 
+	 * found but quantity is not equal but qantity in stock > quantity of sales person
+	 * it will substract the quantity , calculate total price of remaining quantity and update that row
+	 * 
+	 * if not, it will check all the rows of that item in the current stock table, and gets all the r
+	 */
+	public boolean updateModel (WSDTO model)
+	{
+		boolean result = false;
+		WSSalesDTO salesDTO = (WSSalesDTO) model;
+		salesDTO.setCaseCheck(1);
+		WSSalesDTO dto= (WSSalesDTO) dao.getModel(salesDTO);
+		if(dto.isResult())
+		{
+			salesDTO.setCaseUpdate(salesDTO.getCaseUpdate());
+			result= dao.updateModel(salesDTO);
+			return result;
+			
+		}
+		
+		return false;
 	}
 
 }

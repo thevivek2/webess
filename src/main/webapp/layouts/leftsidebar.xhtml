@@ -34,6 +34,12 @@
          <rich:panelMenuItem name="createItem" itemMode="ajax" label="Create" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="items"  >
          <f:param value="createItem" name="pageViewId"/> 
          </rich:panelMenuItem>
+         
+         <rich:panelMenuItem name="stockIn" itemMode="ajax" label="StockIN" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="stockIn"  >
+         <f:param value="stockIn" name="pageViewId"/> 
+         </rich:panelMenuItem>
+         
+         
       <rich:panelMenuItem name="displayItem" itemMode="ajax" label="Display" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="itemsDisplay"  >
          <f:param value="displayItem" name="pageViewId"/> 
          </rich:panelMenuItem>
@@ -46,7 +52,9 @@
          <f:param value="Reports" name="pageViewId"/> 
          </rich:panelMenuItem>
       <rich:panelMenuItem label="Profit  Loss"/>
-      <rich:panelMenuItem label="Stock Summary"/>
+      <rich:panelMenuItem name="stockSummray" itemMode="ajax" label="Stock Summary" actionListener="#{pageViewIdGenerator.getSideBarAction}" action="stockSummary">
+         <f:param value="stockSummray" name="pageViewId"/> 
+         </rich:panelMenuItem>
    </rich:panelMenuGroup>
    
    

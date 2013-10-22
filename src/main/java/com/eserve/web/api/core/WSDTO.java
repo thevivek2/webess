@@ -14,8 +14,6 @@ import java.io.Serializable;
  */
 public abstract interface WSDTO extends Serializable {
 	
-	
-	
 	public int getID();
 	
 	public String toString();

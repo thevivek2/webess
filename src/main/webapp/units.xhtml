@@ -58,7 +58,7 @@
               </h:panelGrid>
               <h:panelGrid columns="7">
              
-             <rich:inplaceSelect id="primaryUnit" required="true"  defaultLabel="--select--"  value="#{wsUnitController.model.unitID}"  openOnEdit="true">
+             <rich:inplaceSelect id="primaryUnit" required="true"  defaultLabel="--select--"  value="#{wsUnitController.model.parentID}"  openOnEdit="true">
                <f:selectItems value="#{wsUnitController.models}" var="units" 
     		itemLabel="#{units.unitName}" itemValue="#{units.unitID}" />
             </rich:inplaceSelect>
@@ -78,12 +78,10 @@
                         </f:facet>
                     </rich:message>
               
-               <rich:inplaceSelect id="secondaryUnit" required="true"  defaultLabel="--select--" value="#{wsUnitController.model.secondaryUnitID}" openOnEdit="true">
+               <rich:inplaceInput id="secondaryUnit" required="true" value="#{wsUnitController.model.unitName}"  defaultLabel="...........New Unit............." minInputWidth="300px;" />
         
-               <f:selectItems value="#{wsUnitController.models}" var="units" 
-    		itemLabel="#{units.unitName}" itemValue="#{units.unitID}" />
-            </rich:inplaceSelect>
-            
+             
+      
              <rich:message  for="secondaryUnit">
                         <f:facet name="errorMarker">
                            

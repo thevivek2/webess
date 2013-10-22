@@ -78,7 +78,7 @@ public class WSLogDAOImpl extends WSCommonDAO implements WSLogDAO {
 			wsLogDTO6.setLogID(6);
 			wsLogDTO6.setLogDesc("Ajax based Application layout and setup. Rich faces Ajax form submit will be used mainly to show the content after the load");
 			wsLogDTO6.setLogDate(getDate("2013/04/23"));
-			wsLogDTO6.setStatus(Status.Inprogress);
+			wsLogDTO6.setStatus(Status.Completed);
 			wsLogDTO6.setLoggedBy("Vivek Adhikari");
 			allLogs.add(wsLogDTO6);
 			
@@ -87,7 +87,7 @@ public class WSLogDAOImpl extends WSCommonDAO implements WSLogDAO {
 			wsLogDTO7.setLogID(7);
 			wsLogDTO7.setLogDesc("This project's all forms will have ajax request and response ");
 			wsLogDTO7.setLogDate(getDate("2013/04/23"));
-			wsLogDTO7.setStatus(Status.Inprogress);
+			wsLogDTO7.setStatus(Status.Completed);
 			wsLogDTO7.setLoggedBy("Vivek Adhikari");
 			allLogs.add(wsLogDTO7);
 			
@@ -105,9 +105,38 @@ public class WSLogDAOImpl extends WSCommonDAO implements WSLogDAO {
 			wsLogDTO9.setLogID(9);
 			wsLogDTO9.setLogDesc("Domain prparation, Relation between domain's, Need to discuss  ");
 			wsLogDTO9.setLogDate(getDate("2013/04/23"));
-			wsLogDTO9.setStatus(Status.Stucked);
+			wsLogDTO9.setStatus(Status.Completed);
 			wsLogDTO9.setLoggedBy("Vivek Adhikari");
 			allLogs.add(wsLogDTO9);
+			
+			WSLogDTO wsLogDTO10 = new WSLogDTO();
+			wsLogDTO10.setLogID(10);
+			wsLogDTO10.setLogDesc("Item add , Stock in   ");
+			wsLogDTO10.setLogDate(getDate("2013/04/27"));
+			wsLogDTO10.setStatus(Status.Completed);
+			wsLogDTO10.setLoggedBy("Vivek Adhikari");
+			allLogs.add(wsLogDTO10);
+			
+			
+			WSLogDTO wsLogDTO11 = new WSLogDTO();
+			wsLogDTO11.setLogID(11);
+			wsLogDTO11.setLogDesc("Unit relation , relator between two and more unit, unit adding pattern  ");
+			wsLogDTO11.setLogDate(getDate("2013/04/29"));
+			wsLogDTO11.setStatus(Status.Completed);
+			wsLogDTO11.setLoggedBy("Vivek Adhikari");
+			allLogs.add(wsLogDTO11);
+			
+			WSLogDTO wsLogDTO12 = new WSLogDTO();
+			wsLogDTO12.setLogID(12);
+			wsLogDTO12.setLogDesc("Validation into different parts   ");
+			wsLogDTO12.setLogDate(getDate("2013/05/5"));
+			wsLogDTO12.setStatus(Status.Inprogress);
+			wsLogDTO12.setLoggedBy("Vivek Adhikari");
+			allLogs.add(wsLogDTO12);
+			
+			
+			
+			
 			
 		return allLogs;
 	}
